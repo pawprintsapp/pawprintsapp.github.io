@@ -8,41 +8,80 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 40px;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            text-align: center;
         }
-        h1 {
-            color: #333;
+        header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
         nav {
-            margin-top: 20px;
+            background-color: #64b5f6;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         nav a {
-            margin: 0 15px;
             text-decoration: none;
-            color: #007BFF;
+            color: white;
             font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #1976D2;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <h1>About PawPrints</h1>
-    <p>Connecting pet lovers one paw at a time!</p>
+    <header>PawPrints - About Us</header>
     
     <nav>
         <a href="/">Home</a>
         <a href="/terms">Terms & Conditions</a>
         <a href="/privacy">Privacy Policy</a>
+        <a href="/support">Support</a>
+        <a href="/faq">FAQ</a>
     </nav>
     
     <div class="container">
+        <h1>About PawPrints</h1>
+        <p>Connecting pet lovers one paw at a time!</p>
+        
         <p>PawPrints is a social platform built for pet lovers to connect, share their pet stories, and find local pet-friendly events.</p>
         <p>Whether you're looking for a playdate for your dog, seeking pet care tips, or just want to share cute photos of your furry friend, PawPrints is the perfect place for you.</p>
-        <p>Join us today and be part of a growing pet-loving community!</p>
+        
+        <h2>Our Mission</h2>
+        <p>At PawPrints, we believe that every pet deserves love, care, and social interaction. Our goal is to create a vibrant and inclusive community where pet owners can share their experiences, find companionship for their pets, and learn valuable pet care tips.</p>
+        
+        <h2>Why PawPrints?</h2>
+        <ul>
+            <li>🌍 Discover and connect with pet lovers in your area.</li>
+            <li>📸 Share and explore adorable pet photos and videos.</li>
+            <li>🐾 Organize and join local pet meetups and events.</li>
+            <li>🔒 Secure and safe environment for you and your pets.</li>
+            <li>📚 Learn from expert tips and advice on pet care.</li>
+        </ul>
+        
+        <h2>Join the PawPrints Family</h2>
+        <p>Be part of a growing global community that shares your passion for pets. Whether you're a new pet owner or a seasoned animal lover, there's always something exciting waiting for you at PawPrints.</p>
+        <p><strong>Download the app today</strong> and start your journey with fellow pet enthusiasts!</p>
     </div>
 </body>
 </html>
