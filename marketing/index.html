@@ -8,25 +8,43 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 40px;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
             text-align: center;
         }
-        h1 {
-            color: #333;
+        header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
         nav {
-            margin-top: 20px;
+            background-color: #64b5f6;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         nav a {
-            margin: 0 15px;
             text-decoration: none;
-            color: #007BFF;
+            color: white;
             font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #1976D2;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .cta {
             margin-top: 20px;
@@ -37,19 +55,18 @@
     </style>
 </head>
 <body>
-    <h1>PawPrints - The Social App for Pet Lovers</h1>
-    <p>Join thousands of pet lovers in the ultimate community for pet connections, playdates, and sharing your pet’s journey!</p>
+    <header>PawPrints - The Social App for Pet Lovers</header>
     
     <nav>
         <a href="/">Home</a>
         <a href="/about">About Us</a>
         <a href="/support">Support</a>
         <a href="/terms">Terms & Conditions</a>
-        <a href="/privacy">Privacy Policy</a>
+        <a href="/privacy-policy">Privacy Policy</a>
     </nav>
     
     <div class="container">
-        <h2>Why Choose PawPrints?</h2>
+        <h1>Why Choose PawPrints?</h1>
         <p>🐾 Connect with other pet lovers near you</p>
         <p>📍 Find pet-friendly parks and events</p>
         <p>📸 Share adorable pet photos & videos</p>

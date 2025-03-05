@@ -8,38 +8,61 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            margin: 40px;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            text-align: center;
         }
-        h1 {
-            color: #333;
+        header {
+            background-color: #2196F3;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
         }
         nav {
-            margin-top: 20px;
+            background-color: #64b5f6;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         nav a {
-            margin: 0 15px;
             text-decoration: none;
-            color: #007BFF;
+            color: white;
             font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background-color: #1976D2;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 40px auto;
             padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to PawPrints</h1>
-    <p>Your ultimate social platform for pet lovers!</p>
+    <header>PawPrints - A Social Network for Pet Lovers</header>
     
     <nav>
+        <a href="/">Home</a>
         <a href="/terms">Terms & Conditions</a>
         <a href="/privacy">Privacy Policy</a>
         <a href="/about">About Us</a>
+        <a href="/support">Support</a>
+        <a href="/faq">FAQ</a>
     </nav>
     
     <div class="container">
+        <h1>Welcome to PawPrints</h1>
+        <p>Your ultimate social platform for pet lovers!</p>
         <p>Connect with pet owners, share your pet’s journey, and find playmates for your furry friends.</p>
         <p>Sign up today and become part of the PawPrints community!</p>
     </div>
