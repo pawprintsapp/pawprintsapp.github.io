@@ -1,0 +1,243 @@
+<!-- partials/header.html -->
+<div class="pp-header-scope">
+  <style>
+    /* ===== PawPrints Header (scoped) ===== */
+    .pp-header-scope {
+      --pp-brand:#2196F3; --pp-brand-2:#64b5f6; --pp-brand-3:#1976D2;
+      --pp-fg:#0a0a0a; --pp-card:#fff;
+
+      /* dynamic sizing for nav */
+      --pp-nav-h:clamp(56px,7vw,80px);
+      --pp-nav-gap:clamp(10px,2.2vw,26px);
+      --pp-pad-x:clamp(10px,1.6vw,18px);
+      --pp-pad-y:clamp(8px,0.9vw,12px);
+      --pp-fs-brand:clamp(18px,2.4vw,22px);
+
+      --pp-space-3:16px;
+    }
+
+    .pp-site-header{
+      position:sticky; top:0; z-index:1000;
+      background:var(--pp-brand); color:#fff;
+      padding:calc(env(safe-area-inset-top) + var(--pp-space-3)) var(--pp-space-3) var(--pp-space-3);
+      text-align:center; font-size:clamp(18px,3.6vw,28px); font-weight:700;
+    }
+
+    .pp-nav-wrap{ background:var(--pp-brand-2); }
+    .pp-nav-row{
+      display:flex; align-items:center; position:relative;
+      min-height:var(--pp-nav-h);
+      padding:0 var(--pp-space-3);
+      gap:var(--pp-nav-gap);
+    }
+
+    /* Brand styled like a peer menu item (not repeated in panel) */
+    .pp-brand-link{
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none; color:#fff; font-weight:800; line-height:1;
+      font-size:var(--pp-fs-brand);
+      border-radius:8px; padding:var(--pp-pad-y) var(--pp-pad-x);
+      white-space:nowrap; transition:background-color 160ms ease;
+      flex:0 0 auto;
+    }
+    .pp-brand-link:hover{ background:var(--pp-brand-3); }
+    .pp-brand-link:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+    .pp-brand-mark{ font-size:1.2em; line-height:1; }
+    .pp-brand-text{ letter-spacing:.2px; }
+
+    /* Centered inline items (hidden when collapsed) */
+    .pp-nav-inline{
+      list-style:none; margin:0 auto; padding:0;
+      display:flex; align-items:center; gap:var(--pp-nav-gap);
+      white-space:nowrap; overflow:hidden; flex:0 1 auto;
+    }
+    .pp-nav-inline li{ display:inline-flex; }
+    .pp-nav-inline a{
+      display:inline-block; text-decoration:none; color:#fff; font-weight:700;
+      padding:var(--pp-pad-y) var(--pp-pad-x); border-radius:8px;
+      transition:background-color 160ms ease;
+    }
+    .pp-nav-inline a:hover{ background:var(--pp-brand-3); }
+    .pp-nav-inline a.pp-active{ background:var(--pp-brand-3); }
+
+    .pp-nav-row.pp-collapsed .pp-nav-inline{ display:none; }
+
+    /* Menu button appears only when collapsed (width-aware JS) */
+    .pp-menu-button{
+      appearance:none; background:transparent; border:0;
+      margin-left:auto; padding:10px; cursor:pointer; border-radius:8px;
+      display:none; align-items:center; justify-content:center; flex:0 0 auto;
+    }
+    .pp-menu-button:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+    .pp-menu-button svg{ width:28px; height:28px; display:block; fill:#fff; }
+    .pp-nav-row.pp-collapsed .pp-menu-button{ display:inline-flex; }
+
+    /* Slide-out panel (brand intentionally omitted) */
+    .pp-menu-sheet{
+      position:fixed; inset:0; z-index:1100;
+      display:none; background:rgba(0,0,0,.45);
+    }
+    .pp-menu-sheet[aria-hidden="false"]{ display:block; }
+    .pp-menu-panel{
+      position:absolute; top:0; right:0; width:min(340px,86vw); height:100%;
+      background:var(--pp-card); color:var(--pp-fg);
+      box-shadow:-6px 0 18px rgba(0,0,0,.25);
+      transform:translateX(100%); transition:transform 220ms ease;
+      display:flex; flex-direction:column; padding:calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
+    }
+    .pp-menu-sheet[aria-hidden="false"] .pp-menu-panel{ transform:translateX(0); }
+    .pp-menu-header{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; }
+    .pp-menu-title{ margin:0; font-size:1.125rem; font-weight:800; }
+    .pp-menu-close{ appearance:none; background:transparent; border:0; cursor:pointer; padding:8px; border-radius:8px; }
+    .pp-menu-close:focus-visible{ outline:2px solid var(--pp-brand); outline-offset:2px; }
+    .pp-menu-close svg{ width:26px; height:26px; }
+    .pp-menu-list{ list-style:none; margin:0; padding:8px 0 0 0; display:grid; gap:8px; }
+    .pp-menu-list a{
+      display:block; text-decoration:none; color:var(--pp-fg);
+      padding:10px 12px; border-radius:8px; background:#f7fbff; border:1px solid #e3f2fd;
+    }
+    .pp-menu-list a:focus-visible{ outline:2px solid var(--pp-brand); outline-offset:2px; }
+
+    @media (prefers-reduced-motion: reduce){ .pp-menu-panel{ transition:none; } }
+  </style>
+
+  <!-- Banner text (same across pages) -->
+  <header class="pp-site-header">A Social Network for Pet Lovers</header>
+
+  <!-- Navigation -->
+  <div class="pp-nav-wrap">
+    <nav class="pp-nav-row" aria-label="Primary">
+      <!-- Brand (looks like another item, never in the drawer) -->
+      <a class="pp-brand-link" href="/" aria-label="PawPrints Home">
+        <span class="pp-brand-mark" aria-hidden="true">🐾</span>
+        <span class="pp-brand-text">PawPrints</span>
+      </a>
+
+      <!-- Inline items (centered). Add/remove items here. -->
+      <ul class="pp-nav-inline">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/terms">Terms &amp; Conditions</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+
+      <!-- Menu button (shown only when collapsed) -->
+      <button class="pp-menu-button" aria-haspopup="dialog" aria-controls="pp-menu-sheet" aria-expanded="false" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Slide-out panel (same items as inline; omit the brand) -->
+  <div class="pp-menu-sheet" id="pp-menu-sheet" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pp-menu-title">
+    <div class="pp-menu-panel" role="document">
+      <div class="pp-menu-header">
+        <h2 class="pp-menu-title" id="pp-menu-title">All Menu Items</h2>
+        <button class="pp-menu-close" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.71 12 12l-6.3-6.29-1.41 1.42L10.59 13.4l-6.3 6.29 1.42 1.41L12 14.83l6.29 6.27 1.41-1.41-6.28-6.29 6.28-6.29z"/></svg>
+        </button>
+      </div>
+      <ul class="pp-menu-list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/terms">Terms &amp; Conditions</a></li>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // ===== Header initializer (scoped to this partial instance) =====
+    (function(){
+      // Find the nearest scope wrapper even if this script is re-executed
+      var root = document.currentScript ?
+        document.currentScript.closest('.pp-header-scope') :
+        document.querySelector('.pp-header-scope');
+      if (!root) return;
+
+      var row      = root.querySelector('.pp-nav-row');
+      var inline   = root.querySelector('.pp-nav-inline');
+      var brand    = root.querySelector('.pp-brand-link');
+      var menuBtn  = root.querySelector('.pp-menu-button');
+      var sheet    = root.querySelector('#pp-menu-sheet');
+      var panel    = root.querySelector('.pp-menu-panel');
+      var closeBtn = root.querySelector('.pp-menu-close');
+      var firstLink= root.querySelector('.pp-menu-list a');
+
+      // Highlight active link by current path
+      try{
+        var path = location.pathname.replace(/\/+$/,'') || '/';
+        root.querySelectorAll('.pp-nav-inline a, .pp-menu-list a').forEach(function(a){
+          var ap = a.getAttribute('href').replace(/\/+$/,'') || '/';
+          if (ap === path) a.classList.add('pp-active');
+        });
+      }catch(_){}
+
+      // Width-aware collapse (never clip an item; reserve space for menu button)
+      var MIN_MENU_BTN = 48; // px
+      var SAFETY = 8;        // px
+
+      function measureAndToggle(){
+        if (!row || !inline) return;
+        var prev = inline.style.display;
+        inline.style.display = 'flex';
+
+        var rowW   = row.clientWidth;
+        var brandW = brand ? brand.offsetWidth : 0;
+        var btnW   = (menuBtn && menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
+        var needW  = brandW + inline.scrollWidth + btnW + SAFETY;
+
+        var collapse = needW > rowW;
+        inline.style.display = prev;
+        row.classList.toggle('pp-collapsed', collapse);
+        if (menuBtn) menuBtn.style.display = collapse ? 'inline-flex' : 'none';
+      }
+
+      // Slide-out open/close
+      function openMenu(){
+        if (!sheet || !menuBtn) return;
+        sheet.setAttribute('aria-hidden','false');
+        menuBtn.setAttribute('aria-expanded','true');
+        setTimeout(function(){ (firstLink || closeBtn).focus(); }, 0);
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu(){
+        if (!sheet || !menuBtn) return;
+        sheet.setAttribute('aria-hidden','true');
+        menuBtn.setAttribute('aria-expanded','false');
+        menuBtn.focus();
+        document.body.style.overflow = '';
+      }
+
+      if (menuBtn) menuBtn.addEventListener('click', openMenu);
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+      if (sheet && panel){
+        sheet.addEventListener('click', function(e){ if (!panel.contains(e.target)) closeMenu(); });
+      }
+      window.addEventListener('keydown', function(e){
+        if (sheet && sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') {
+          e.preventDefault(); closeMenu();
+        }
+      });
+
+      // Recompute on load/resize/orientation and on content changes
+      window.addEventListener('load', measureAndToggle);
+      window.addEventListener('resize', measureAndToggle);
+      window.addEventListener('orientationchange', measureAndToggle);
+      if (window.ResizeObserver){
+        var ro = new ResizeObserver(measureAndToggle);
+        if (row) ro.observe(row);
+        if (inline) ro.observe(inline);
+        if (brand) ro.observe(brand);
+      }
+      // Initial run
+      measureAndToggle();
+    })();
+  </script>
+</div>
