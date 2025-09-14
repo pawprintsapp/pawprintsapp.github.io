@@ -1,198 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Privacy Policy | PawPrints</title>
-  <style>
-    html { -webkit-text-size-adjust: 100%; box-sizing: border-box; }
-    *, *::before, *::after { box-sizing: inherit; }
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Privacy Policy | PawPrints</title>
+    <style>
+      html {
+        -webkit-text-size-adjust: 100%;
+        box-sizing: border-box;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+      :root {
+        --brand: #2196f3;
+        --brand-2: #64b5f6;
+        --brand-3: #1976d2;
+        --bg: #e3f2fd;
+        --fg: #0a0a0a;
+        --card: #fff;
+        --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --fs-body: clamp(15px, 1.5vw, 17px);
+        --fs-h1: clamp(22px, 4.2vw, 34px);
+        --fs-hdr: clamp(18px, 3.6vw, 28px);
+        --container-max: 800px;
+        --space-1: 8px;
+        --space-2: 12px;
+        --space-3: 16px;
+        --space-4: 20px;
+        --space-5: 28px;
+        --radius: 10px;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.6;
+        color: var(--fg);
+        background: var(--bg);
+      }
+      header.site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--brand);
+        color: #fff;
+        padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3)
+          var(--space-3);
+        text-align: center;
+        font-size: var(--fs-hdr);
+        font-weight: 700;
+      }
+      .nav-wrap {
+        background: var(--brand-2);
+        padding: var(--space-2);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        gap: var(--space-2);
+      }
+      .nav-toggle {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        padding: var(--space-1);
+        margin: -4px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+      .nav-toggle:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+      .nav-toggle svg {
+        width: 28px;
+        height: 28px;
+        display: block;
+        fill: #fff;
+      }
+      nav.primary {
+        width: 100%;
+      }
+      .nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 220ms ease;
+      }
+      .nav-links a {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        color: #fff;
+        font-weight: 700;
+        padding: 10px 14px;
+        border-radius: 6px;
+        background: transparent;
+        transition: background-color 160ms ease;
+        word-break: break-word;
+      }
+      .nav-links a:hover {
+        background: var(--brand-3);
+      }
+      nav.primary[aria-expanded="true"] .nav-links {
+        max-height: 100vh;
+      }
+      .container {
+        max-width: var(--container-max);
+        margin: var(--space-5) auto;
+        padding: var(--space-4);
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        text-align: left;
+      }
+      h1 {
+        font-size: var(--fs-h1);
+        line-height: 1.25;
+        margin: 0 0 var(--space-3);
+      }
+      p,
+      li {
+        font-size: var(--fs-body);
+      }
+      ul {
+        padding-left: 20px;
+      }
+      @media (min-width: 640px) {
+        .nav-toggle {
+          display: none;
+        }
+        .nav-links {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 14px 18px;
+          max-height: none !important;
+        }
+        .container {
+          padding: 32px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .nav-links {
+          transition: none;
+        }
+      }
+      .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">PawPrints - Privacy Policy</header>
 
-    :root {
-      --brand: #2196F3;
-      --brand-2: #64b5f6;
-      --brand-3: #1976D2;
-      --bg: #e3f2fd;
-      --fg: #0a0a0a;
-      --card: #ffffff;
-      --shadow: 0 4px 8px rgba(0,0,0,0.1);
-
-      --fs-body: clamp(15px, 1.5vw, 17px);
-      --fs-h1: clamp(22px, 4.2vw, 34px);
-      --fs-hdr: clamp(18px, 3.6vw, 28px);
-
-      --container-max: 800px;
-      --space-1: 8px;
-      --space-2: 12px;
-      --space-3: 16px;
-      --space-4: 20px;
-      --space-5: 28px;
-      --radius: 10px;
-    }
-
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height: 1.6;
-      color: var(--fg);
-      background-color: var(--bg);
-    }
-
-    header.site-header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background-color: var(--brand);
-      color: #fff;
-      padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
-      text-align: center;
-      font-size: var(--fs-hdr);
-      font-weight: 700;
-    }
-
-    .nav-wrap { background-color: var(--brand-2); padding: var(--space-2); }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: var(--container-max); margin: 0 auto; gap: var(--space-2); }
-    .nav-toggle { appearance: none; background: transparent; border: 0; padding: var(--space-1); margin: -4px; cursor: pointer; border-radius: 8px; }
-    .nav-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
-    .nav-toggle svg { width: 28px; height: 28px; display: block; fill: #fff; }
-    nav.primary { width: 100%; }
-    .nav-links { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 8px; max-height: 0; overflow: hidden; transition: max-height 220ms ease; }
-    .nav-links a { display: block; text-decoration: none; text-align: center; color: #fff; font-weight: 700; padding: 10px 14px; border-radius: 6px; background: transparent; transition: background-color 160ms ease; word-break: break-word; }
-    .nav-links a:hover { background-color: var(--brand-3); }
-    nav.primary[aria-expanded="true"] .nav-links { max-height: 100vh; }
-
-    .container {
-      max-width: var(--container-max);
-      margin: var(--space-5) auto;
-      padding: var(--space-4);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      text-align: left;
-    }
-
-    h1 { font-size: var(--fs-h1); line-height: 1.25; margin: 0 0 var(--space-3); }
-    h2 { font-size: clamp(18px, 2.6vw, 24px); margin: var(--space-4) 0 var(--space-2); }
-    p, li { font-size: var(--fs-body); }
-    ul { padding-left: 20px; }
-
-    @media (min-width: 640px) {
-      .nav-toggle { display: none; }
-      .nav-links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 18px; max-height: none !important; }
-      .container { padding: 32px; }
-    }
-    @media (prefers-reduced-motion: reduce) { .nav-links { transition: none; } }
-    .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
-  </style>
-</head>
-<body>
-  <header class="site-header">PawPrints - Privacy Policy</header>
-
-  <div class="nav-wrap safe-bottom">
-    <div class="nav-inner">
-      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-      </button>
-      <nav id="primary-nav" class="primary" aria-expanded="false">
-        <ul class="nav-links">
-          <li><a href="/">Home</a></li>
-          <li><a href="/terms">Terms &amp; Conditions</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
+    <div class="nav-wrap safe-bottom">
+      <div class="nav-inner">
+        <button
+          class="nav-toggle"
+          aria-controls="primary-nav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+          </svg>
+        </button>
+        <nav id="primary-nav" class="primary" aria-expanded="false">
+          <ul class="nav-links">
+             <li><a href="/">Home</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/support">Support</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
           <li><a href="/faq">FAQ</a></li>
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+      </div>
     </div>
-  </div>
 
-  <main class="container">
-    <h1>Privacy Policy</h1>
+    <main class="container">
+      <h1>Privacy Policy</h1>
 
-    <p>Effective Date:
-      <time id="effective-date" datetime="">Loading…</time>
-    </p>
+      <p>
+        Effective Date:
+        <time id="effective-date" datetime="">Loading…</time>
+      </p>
 
-    <p>PawPrints is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and disclose your information when you use our app.</p>
+      <p>
+        PawPrints is committed to protecting your privacy. This Privacy Policy
+        explains how we collect, use, and disclose your information when you use
+        our app.
+      </p>
 
-    <h2>1. Information We Collect</h2>
-    <ul>
-      <li><strong>Personal Information:</strong> We collect your name, email address, and other user contact info when you create an account.</li>
-      <li><strong>Location Data:</strong> We collect and use precise location data to enhance user experience, such as finding nearby playmates.</li>
-      <li><strong>User Content:</strong> Any photos or videos you upload to PawPrints.</li>
-      <li><strong>Identifiers:</strong> We may collect User ID and Device ID to improve app functionality.</li>
-      <li><strong>Usage Data:</strong> Advertising data and app interactions may be collected for analytics and performance improvement.</li>
-      <li><strong>Diagnostics:</strong> We collect crash data, performance data, and other diagnostics to enhance app stability.</li>
-    </ul>
+      <h2>1. Information We Collect</h2>
+      <ul>
+        <li>
+          <strong>Personal Information:</strong> We collect your name, email
+          address, and other user contact info when you create an account.
+        </li>
+        <li>
+          <strong>Location Data:</strong> We collect and use precise location
+          data to enhance user experience, such as finding nearby playmates.
+        </li>
+        <li>
+          <strong>User Content:</strong> Any photos or videos you upload to
+          PawPrints.
+        </li>
+        <li>
+          <strong>Identifiers:</strong> We may collect User ID and Device ID to
+          improve app functionality.
+        </li>
+        <li>
+          <strong>Usage Data:</strong> Advertising data and app interactions may
+          be collected for analytics and performance improvement.
+        </li>
+        <li>
+          <strong>Diagnostics:</strong> We collect crash data, performance data,
+          and other diagnostics to enhance app stability.
+        </li>
+      </ul>
 
-    <h2>2. How We Use Your Information</h2>
-    <ul>
-      <li>Provide, operate, and improve PawPrints.</li>
-      <li>Personalize user experiences.</li>
-      <li>Send service-related updates and support messages.</li>
-      <li>Ensure security and prevent fraud.</li>
-    </ul>
+      <h2>2. How We Use Your Information</h2>
+      <ul>
+        <li>Provide, operate, and improve PawPrints.</li>
+        <li>Personalize user experiences.</li>
+        <li>Send service-related updates and support messages.</li>
+        <li>Ensure security and prevent fraud.</li>
+      </ul>
 
-    <h2>3. Data Tracking</h2>
-    <p>We may use location data to track users across apps and websites owned by other companies for analytics and performance enhancements.</p>
+      <h2>3. Data Tracking</h2>
+      <p>
+        We may use location data to track users across apps and websites owned
+        by other companies for analytics and performance enhancements.
+      </p>
 
-    <h2>4. Sharing Your Information</h2>
-    <ul>
-      <li><strong>Service Providers:</strong> Third-party partners who help us operate the app.</li>
-      <li><strong>Legal Compliance:</strong> If required by law or to protect user safety.</li>
-    </ul>
+      <h2>4. Sharing Your Information</h2>
+      <ul>
+        <li>
+          <strong>Service Providers:</strong> Third-party partners who help us
+          operate the app.
+        </li>
+        <li>
+          <strong>Legal Compliance:</strong> If required by law or to protect
+          user safety.
+        </li>
+      </ul>
 
-    <h2>5. Data Security</h2>
-    <p>We implement security measures to protect your data, but no method of transmission is 100% secure.</p>
+      <h2>5. Data Security</h2>
+      <p>
+        We implement security measures to protect your data, but no method of
+        transmission is 100% secure.
+      </p>
 
-    <h2>6. Your Choices &amp; Rights</h2>
-    <ul>
-      <li>Update or delete your account information.</li>
-      <li>Control app permissions through your device settings.</li>
-      <li>Opt-out of marketing emails.</li>
-    </ul>
+      <h2>6. Your Choices &amp; Rights</h2>
+      <ul>
+        <li>Update or delete your account information.</li>
+        <li>Control app permissions through your device settings.</li>
+        <li>Opt-out of marketing emails.</li>
+      </ul>
 
-    <h2>7. Children's Privacy</h2>
-    <p>PawPrints is not intended for users under 13 without parental consent.</p>
+      <h2>7. Children's Privacy</h2>
+      <p>
+        PawPrints is not intended for users under 13 without parental consent.
+      </p>
 
-    <h2>8. Changes to This Policy</h2>
-    <p>We may update this Privacy Policy. We will notify users of significant changes.</p>
+      <h2>8. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy. We will notify users of significant
+        changes.
+      </p>
 
-    <h2>9. Contact Us</h2>
-    <p>If you have any questions, please contact us at <a href="mailto:support@pawprintsapp.com">support@pawprintsapp.com</a>.</p>
-  </main>
+      <h2>9. Contact Us</h2>
+      <p>
+        If you have any questions, please contact us at
+        <a href="mailto:support@pawprintsapp.com">support@pawprintsapp.com</a>.
+      </p>
+    </main>
 
-  <!-- Keep your effective-date script -->
-  <script>
-    (function setEffectiveDate() {
-      var tz = 'America/Denver';
-      var now = new Date();
+    <!-- Keep your effective-date script -->
+    <script>
+      (function setEffectiveDate() {
+        var tz = "America/Denver";
+        var now = new Date();
 
-      var readable = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz, year: 'numeric', month: 'long', day: 'numeric'
-      }).format(now);
+        var readable = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        }).format(now);
 
-      var parts = new Intl.DateTimeFormat('en-US', {
-        timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit'
-      }).formatToParts(now).reduce(function(acc, p) { acc[p.type] = p.value; return acc; }, {});
-      var iso = parts.year + '-' + parts.month + '-' + parts.day;
+        var parts = new Intl.DateTimeFormat("en-US", {
+          timeZone: tz,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+        })
+          .formatToParts(now)
+          .reduce(function (acc, p) {
+            acc[p.type] = p.value;
+            return acc;
+          }, {});
+        var iso = parts.year + "-" + parts.month + "-" + parts.day;
 
-      var el = document.getElementById('effective-date');
-      if (el) { el.textContent = readable; el.setAttribute('datetime', iso); }
-    })();
+        var el = document.getElementById("effective-date");
+        if (el) {
+          el.textContent = readable;
+          el.setAttribute("datetime", iso);
+        }
+      })();
 
-    // Hamburger toggle (same as home)
-    (function () {
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('primary-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        nav.setAttribute('aria-expanded', String(!expanded));
-      });
-    })();
-  </script>
-</body>
+      // Hamburger toggle (same as home)
+      (function () {
+        var btn = document.querySelector(".nav-toggle");
+        var nav = document.getElementById("primary-nav");
+        if (!btn || !nav) return;
+        btn.addEventListener("click", function () {
+          var expanded = btn.getAttribute("aria-expanded") === "true";
+          btn.setAttribute("aria-expanded", String(!expanded));
+          nav.setAttribute("aria-expanded", String(!expanded));
+        });
+      })();
+    </script>
+  </body>
 </html>

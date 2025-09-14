@@ -6,100 +6,162 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Marketing | PawPrints</title>
   <style>
-    /* ==== Base / Reset ==== */
-    html { -webkit-text-size-adjust: 100%; box-sizing: border-box; }
-    *, *::before, *::after { box-sizing: inherit; }
-
-    :root{
-      --brand:#2196F3; --brand-2:#64b5f6; --brand-3:#1976D2;
-      --bg:#e3f2fd; --fg:#0a0a0a; --card:#fff; --shadow:0 4px 8px rgba(0,0,0,.1);
-
-      /* Fluid typography */
-      --fs-body:clamp(15px,1.5vw,17px);
-      --fs-h1:clamp(22px,4.2vw,34px);
-      --fs-hdr:clamp(18px,3.6vw,28px);
-
-      --container-max:800px;
-      --space-1:8px; --space-2:12px; --space-3:16px; --space-4:20px; --space-5:28px;
-      --radius:10px;
-    }
-
-    body{
-      margin:0;
-      font-family:ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      line-height:1.6;
-      color:var(--fg);
-      background:var(--bg);
-    }
-
-    /* ==== Header ==== */
-    header.site-header{
-      position:sticky; top:0; z-index:1000;
-      background:var(--brand); color:#fff;
-      padding:calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
-      text-align:center;
-      font-size:var(--fs-hdr); font-weight:700;
-    }
-
-    /* ==== Nav (mobile-first) ==== */
-    .nav-wrap{ background:var(--brand-2); padding:var(--space-2); }
-    .nav-inner{
-      display:flex; align-items:center; justify-content:space-between;
-      max-width:var(--container-max); margin:0 auto; gap:var(--space-2);
-    }
-    .nav-toggle{
-      appearance:none; background:transparent; border:0;
-      padding:var(--space-1); margin:-4px; cursor:pointer; border-radius:8px;
-    }
-    .nav-toggle:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
-    .nav-toggle svg{ width:28px; height:28px; display:block; fill:#fff; }
-
-    nav.primary{ width:100%; }
-    .nav-links{
-      list-style:none; margin:0; padding:0;
-      display:grid; grid-template-columns:1fr; gap:8px;
-      max-height:0; overflow:hidden; transition:max-height 220ms ease;
-    }
-    .nav-links a{
-      display:block; text-decoration:none; text-align:center;
-      color:#fff; font-weight:700; padding:10px 14px; border-radius:6px;
-      background:transparent; transition:background-color 160ms ease;
-      word-break:break-word;
-    }
-    .nav-links a:hover{ background:var(--brand-3); }
-
-    /* Expanded state (controlled via aria-expanded) */
-    nav.primary[aria-expanded="true"] .nav-links{ max-height:100vh; }
-
-    /* ==== Container ==== */
-    .container{
-      max-width:var(--container-max);
-      margin:var(--space-5) auto;
-      padding:var(--space-4);
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      text-align:left;
-    }
-
-    h1{ font-size:var(--fs-h1); line-height:1.25; margin:0 0 var(--space-3); }
-    p, li{ font-size:var(--fs-body); margin:0 0 10px; }
-    .cta{ margin-top:20px; font-size:1.2em; font-weight:700; color:#ff4500; }
-
-    /* ==== Larger screens (tablet+) ==== */
-    @media (min-width:640px){
-      .nav-toggle{ display:none; }
-      .nav-links{
-        display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
-        gap:14px 18px; max-height:none !important;
+    html {
+        -webkit-text-size-adjust: 100%;
+        box-sizing: border-box;
       }
-      .container{ padding:32px; }
-    }
-
-    @media (prefers-reduced-motion:reduce){ .nav-links{ transition:none; } }
-
-    /* iPhone safe area for bottom home indicator */
-    .safe-bottom{ padding-bottom:env(safe-area-inset-bottom); }
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+      :root {
+        --brand: #2196f3;
+        --brand-2: #64b5f6;
+        --brand-3: #1976d2;
+        --bg: #e3f2fd;
+        --fg: #0a0a0a;
+        --card: #fff;
+        --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --fs-body: clamp(15px, 1.5vw, 17px);
+        --fs-h1: clamp(22px, 4.2vw, 34px);
+        --fs-hdr: clamp(18px, 3.6vw, 28px);
+        --container-max: 800px;
+        --space-1: 8px;
+        --space-2: 12px;
+        --space-3: 16px;
+        --space-4: 20px;
+        --space-5: 28px;
+        --radius: 10px;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        line-height: 1.6;
+        color: var(--fg);
+        background: var(--bg);
+      }
+      header.site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: var(--brand);
+        color: #fff;
+        padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3)
+          var(--space-3);
+        text-align: center;
+        font-size: var(--fs-hdr);
+        font-weight: 700;
+      }
+      .nav-wrap {
+        background: var(--brand-2);
+        padding: var(--space-2);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: var(--container-max);
+        margin: 0 auto;
+        gap: var(--space-2);
+      }
+      .nav-toggle {
+        appearance: none;
+        background: transparent;
+        border: 0;
+        padding: var(--space-1);
+        margin: -4px;
+        cursor: pointer;
+        border-radius: 8px;
+      }
+      .nav-toggle:focus-visible {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+      }
+      .nav-toggle svg {
+        width: 28px;
+        height: 28px;
+        display: block;
+        fill: #fff;
+      }
+      nav.primary {
+        width: 100%;
+      }
+      .nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 220ms ease;
+      }
+      .nav-links a {
+        display: block;
+        text-decoration: none;
+        text-align: center;
+        color: #fff;
+        font-weight: 700;
+        padding: 10px 14px;
+        border-radius: 6px;
+        background: transparent;
+        transition: background-color 160ms ease;
+        word-break: break-word;
+      }
+      .nav-links a:hover {
+        background: var(--brand-3);
+      }
+      nav.primary[aria-expanded="true"] .nav-links {
+        max-height: 100vh;
+      }
+      .container {
+        max-width: var(--container-max);
+        margin: var(--space-5) auto;
+        padding: var(--space-4);
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        text-align: left;
+      }
+      h1 {
+        font-size: var(--fs-h1);
+        line-height: 1.25;
+        margin: 0 0 var(--space-3);
+      }
+      p,
+      li {
+        font-size: var(--fs-body);
+      }
+      ul {
+        padding-left: 20px;
+      }
+      @media (min-width: 640px) {
+        .nav-toggle {
+          display: none;
+        }
+        .nav-links {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 14px 18px;
+          max-height: none !important;
+        }
+        .container {
+          padding: 32px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .nav-links {
+          transition: none;
+        }
+      }
+      .safe-bottom {
+        padding-bottom: env(safe-area-inset-bottom);
+      }
   </style>
 </head>
 <body>
@@ -114,7 +176,7 @@
 
       <nav id="primary-nav" class="primary" aria-expanded="false">
         <ul class="nav-links">
-          <li><a href="/">Home</a></li>
+           <li><a href="/">Home</a></li>
           <li><a href="/about">About Us</a></li>
           <li><a href="/support">Support</a></li>
           <li><a href="/terms">Terms &amp; Conditions</a></li>
