@@ -1,70 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PawPrints | Home</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #e3f2fd;
-            text-align: center;
-        }
-        header {
-            background-color: #2196F3;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        nav {
-            background-color: #64b5f6;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        nav a:hover {
-            background-color: #1976D2;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PawPrints | Home</title>
+  <style>
+    /* ==== Base / Reset ==== */
+    html {
+      -webkit-text-size-adjust: 100%; /* prevent odd zoom on iOS */
+      box-sizing: border-box;
+    }
+    *, *::before, *::after { box-sizing: inherit; }
+
+    :root {
+      --brand: #2196F3;
+      --brand-2: #64b5f6;
+      --brand-3: #1976D2;
+      --bg: #e3f2fd;
+      --fg: #0a0a0a;
+      --card: #ffffff;
+      --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+      /* Fluid type scales for headings and body */
+      --fs-body: clamp(15px, 1.5vw, 17px);
+      --fs-h1: clamp(22px, 4.2vw, 34px);
+      --fs-hdr: clamp(18px, 3.6vw, 28px);
+
+      /* Layout sizes */
+      --container-max: 800px;
+      --space-1: 8px;
+      --space-2: 12px;
+      --space-3: 16px;
+      --space-4: 20px;
+      --space-5: 28px;
+      --radius: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.6;
+      color: var(--fg);
+      background-color: var(--bg);
+    }
+
+    /* ==== Header ==== */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: var(--brand);
+      color: #fff;
+      padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
+      text-align: center;
+      font-size: var(--fs-hdr);
+      font-weight: 700;
+    }
+
+    /* ==== Nav (mobile-first) ==== */
+    .nav-wrap {
+      background-color: var(--brand-2);
+      padding: var(--space-2);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--container-max);
+      margin: 0 auto;
+      gap: var(--space-2);
+    }
+
+    /* Hamburger button visible on small screens */
+    .nav-toggle {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      padding: var(--space-1);
+      margin: -4px; /* tighter visual alignment */
+      cursor: pointer;
+      border-radius: 8px;
+    }
+    .nav-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+    .nav-toggle svg { width: 28px; height: 28px; display: block; fill: #fff; }
+
+    /* Link list collapses by default on mobile */
+    nav.primary {
+      width: 100%;
+    }
+    .nav-links {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 220ms ease;
+    }
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 6px;
+      background: transparent;
+      transition: background-color 160ms ease;
+      word-break: break-word;
+    }
+    .nav-links a:hover { background-color: var(--brand-3); }
+
+    /* Expanded state (controlled by [aria-expanded]) */
+    nav.primary[aria-expanded="true"] .nav-links {
+      max-height: 100vh; /* open fully on mobile */
+    }
+
+    /* ==== Container ==== */
+    .container {
+      max-width: var(--container-max);
+      margin: var(--space-5) auto;
+      padding: var(--space-4);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+
+    h1 { font-size: var(--fs-h1); line-height: 1.25; margin: 0 0 var(--space-3); }
+    p  { font-size: var(--fs-body); margin: 0 0 10px; }
+
+    /* ==== Larger screens (tablet+) ==== */
+    @media (min-width: 640px) {
+      .nav-inner { gap: var(--space-3); }
+
+      /* Show links inline, hide hamburger */
+      .nav-toggle { display: none; }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 14px 18px;
+        max-height: none !important;
+      }
+      .nav-links a { padding: 8px 12px; }
+    }
+
+    /* ==== Desktop enhancements ==== */
+    @media (min-width: 992px) {
+      .container { padding: 32px; }
+    }
+
+    /* Respect reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .nav-links { transition: none; }
+    }
+
+    /* Safe area on bottom for iOS home indicator */
+    .safe-bottom {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  </style>
 </head>
 <body>
-    <header>PawPrints - A Social Network for Pet Lovers</header>
-    
-    <nav>
-        <a href="/">Home</a>
-        <a href="/terms">Terms & Conditions</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/about">About Us</a>
-        <a href="/support">Support</a>
-        <a href="/faq">FAQ</a>
-    </nav>
-    
-    <div class="container">
-        <h1>Welcome to PawPrints</h1>
-        <p>Your ultimate social platform for pet lovers!</p>
-        <p>Connect with pet owners, share your pet’s journey, and find playmates for your furry friends.</p>
-        <p>Sign up today and become part of the PawPrints community!</p>
+  <header class="site-header">PawPrints - A Social Network for Pet Lovers</header>
+
+  <div class="nav-wrap safe-bottom">
+    <div class="nav-inner">
+      <!-- Hamburger (mobile only) -->
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+
+      <nav id="primary-nav" class="primary" aria-expanded="false">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/support">Support</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </nav>
     </div>
+  </div>
+
+  <main class="container">
+    <h1>Welcome to PawPrints</h1>
+    <p>Your ultimate social platform for pet lovers!</p>
+    <p>Connect with pet owners, share your pet’s journey, and find playmates for your furry friends.</p>
+    <p>Sign up today and become part of the PawPrints community!</p>
+  </main>
+
+  <script>
+    // Small, accessible hamburger toggle
+    (function () {
+      var btn = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('primary-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        nav.setAttribute('aria-expanded', String(!expanded));
+      });
+    })();
+  </script>
 </body>
 </html>

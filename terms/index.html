@@ -1,112 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms and Conditions | PawPrints</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #e3f2fd;
-            text-align: center;
-        }
-        header {
-            background-color: #2196F3;
-            color: white;
-            padding: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        nav {
-            background-color: #64b5f6;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        nav a:hover {
-            background-color: #1976D2;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: left;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Terms & Conditions | PawPrints</title>
+  <style>
+    html { -webkit-text-size-adjust: 100%; box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: inherit; }
+    :root{
+      --brand:#2196F3; --brand-2:#64b5f6; --brand-3:#1976D2;
+      --bg:#e3f2fd; --fg:#0a0a0a; --card:#fff; --shadow:0 4px 8px rgba(0,0,0,0.1);
+      --fs-body:clamp(15px,1.5vw,17px); --fs-h1:clamp(22px,4.2vw,34px); --fs-hdr:clamp(18px,3.6vw,28px);
+      --container-max:800px; --space-1:8px; --space-2:12px; --space-3:16px; --space-4:20px; --space-5:28px; --radius:10px;
+    }
+    body{ margin:0; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      line-height:1.6; color:var(--fg); background:var(--bg); }
+    header.site-header{ position:sticky; top:0; z-index:1000; background:var(--brand); color:#fff;
+      padding:calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
+      text-align:center; font-size:var(--fs-hdr); font-weight:700; }
+    .nav-wrap{ background:var(--brand-2); padding:var(--space-2); }
+    .nav-inner{ display:flex; align-items:center; justify-content:space-between; max-width:var(--container-max); margin:0 auto; gap:var(--space-2); }
+    .nav-toggle{ appearance:none; background:transparent; border:0; padding:var(--space-1); margin:-4px; cursor:pointer; border-radius:8px; }
+    .nav-toggle:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+    .nav-toggle svg{ width:28px; height:28px; display:block; fill:#fff; }
+    nav.primary{ width:100%; }
+    .nav-links{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr; gap:8px; max-height:0; overflow:hidden; transition:max-height 220ms ease; }
+    .nav-links a{ display:block; text-decoration:none; text-align:center; color:#fff; font-weight:700; padding:10px 14px; border-radius:6px; background:transparent; transition:background-color 160ms ease; word-break:break-word; }
+    .nav-links a:hover{ background:var(--brand-3); }
+    nav.primary[aria-expanded="true"] .nav-links{ max-height:100vh; }
+    .container{ max-width:var(--container-max); margin:var(--space-5) auto; padding:var(--space-4); background:var(--card);
+      border-radius:var(--radius); box-shadow:var(--shadow); text-align:left; }
+    h1{ font-size:var(--fs-h1); line-height:1.25; margin:0 0 var(--space-3); }
+    p, li{ font-size:var(--fs-body); }
+    ul{ padding-left:20px; }
+    @media (min-width:640px){
+      .nav-toggle{ display:none; }
+      .nav-links{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:14px 18px; max-height:none !important; }
+      .container{ padding:32px; }
+    }
+    @media (prefers-reduced-motion:reduce){ .nav-links{ transition:none; } }
+    .safe-bottom{ padding-bottom:env(safe-area-inset-bottom); }
+  </style>
 </head>
 <body>
-    <header>PawPrints - Terms & Conditions</header>
-    
-    <nav>
-        <a href="/">Home</a>
-        <a href="/terms">Terms & Conditions</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/about">About Us</a>
-        <a href="/support">Support</a>
-        <a href="/faq">FAQ</a>
-    </nav>
-    
-    <div class="container">
-        <h1>Terms and Conditions</h1>
-        <p>Effective Date: [Insert Date]</p>
-        <p>Welcome to PawPrints! By accessing or using our app, you agree to comply with and be bound by the following Terms and Conditions.</p>
-        
-        <h2>1. Introduction</h2>
-        <p>PawPrints is a social platform for pet lovers. These terms govern your use of our mobile application and services.</p>
-        
-        <h2>2. Definitions</h2>
-        <p>"App" refers to PawPrints. "User" refers to anyone who accesses or uses PawPrints.</p>
-        
-        <h2>3. Eligibility</h2>
-        <p>You must be at least 13 years old to use PawPrints. If you are under 18, you must have parental or guardian consent.</p>
-        
-        <h2>4. User Accounts</h2>
-        <p>You must provide accurate information when registering. You are responsible for maintaining the confidentiality of your account.</p>
-        
-        <h2>5. Acceptable Use</h2>
-        <p>Users must not engage in harassment, hate speech, spamming, or any illegal activity. Violations may result in account suspension.</p>
-        
-        <h2>6. Content Ownership</h2>
-        <p>Users retain ownership of the content they post but grant PawPrints a license to display and distribute content within the app.</p>
-        
-        <h2>7. Privacy & Data Collection</h2>
-        <p>We collect and store user data in accordance with our <a href="/privacy-policy">Privacy Policy</a>.</p>
-        
-        <h2>8. In-App Purchases</h2>
-        <p>Purchases made within the app are subject to store policies (Google Play and Apple App Store). Refunds are not guaranteed.</p>
-        
-        <h2>9. Third-Party Services</h2>
-        <p>PawPrints may contain third-party links or ads. We are not responsible for external content.</p>
-        
-        <h2>10. Disclaimers</h2>
-        <p>PawPrints is provided "as is" without warranties of any kind. We are not liable for any damages resulting from app usage.</p>
-        
-        <h2>11. Termination</h2>
-        <p>We reserve the right to suspend or delete accounts that violate these Terms.</p>
-        
-        <h2>12. Governing Law</h2>
-        <p>These Terms are governed by the laws of [Your State/Country].</p>
-        
-        <h2>13. Changes to Terms</h2>
-        <p>We may update these Terms at any time. Users will be notified of significant changes.</p>
-        
-        <h2>14. Contact Information</h2>
-        <p>If you have any questions about these Terms, please contact us at <a href="mailto:support@pawprintsapp.com">support@pawprintsapp.com</a>.</p>
+  <header class="site-header">PawPrints - Terms &amp; Conditions</header>
+
+  <div class="nav-wrap safe-bottom">
+    <div class="nav-inner">
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+      <nav id="primary-nav" class="primary" aria-expanded="false">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/support">Support</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/faq">FAQ</a></li>
+        </ul>
+      </nav>
     </div>
+  </div>
+
+  <main class="container">
+    <h1>Terms and Conditions</h1>
+    <p>Effective Date: <time id="terms-effective-date" datetime="">Loading…</time></p>
+
+    <h2>1. Introduction</h2>
+    <p>PawPrints is a social platform for pet lovers. These terms govern your use of our mobile application and services.</p>
+
+    <h2>2. Eligibility</h2>
+    <p>You must be at least 13 years old to use PawPrints. If you are under 18, you must have parental or guardian consent.</p>
+
+    <h2>3. User Accounts</h2>
+    <p>You must provide accurate information when registering. You are responsible for maintaining the confidentiality of your account.</p>
+
+    <h2>4. Acceptable Use</h2>
+    <p>Users must not engage in harassment, hate speech, spamming, or any illegal activity. Violations may result in account suspension.</p>
+
+    <h2>5. Content Ownership</h2>
+    <p>Users retain ownership of the content they post but grant PawPrints a license to display and distribute content within the app.</p>
+
+    <h2>6. Privacy &amp; Data Collection</h2>
+    <p>We collect and store user data in accordance with our <a href="/privacy">Privacy Policy</a>.</p>
+
+    <h2>7. In-App Purchases</h2>
+    <p>Purchases made within the app are subject to store policies (Google Play and Apple App Store). Refunds are not guaranteed.</p>
+
+    <h2>8. Third-Party Services</h2>
+    <p>PawPrints may contain third-party links or ads. We are not responsible for external content.</p>
+
+    <h2>9. Disclaimers</h2>
+    <p>PawPrints is provided “as is” without warranties of any kind. We are not liable for any damages resulting from app usage.</p>
+
+    <h2>10. Termination</h2>
+    <p>We reserve the right to suspend or delete accounts that violate these Terms.</p>
+
+    <h2>11. Governing Law</h2>
+    <p>These Terms are governed by the laws of your applicable jurisdiction.</p>
+
+    <h2>12. Changes to Terms</h2>
+    <p>We may update these Terms at any time. Users will be notified of significant changes.</p>
+
+    <h2>13. Contact</h2>
+    <p>Questions about these Terms? <a href="mailto:support@pawprintsapp.com">support@pawprintsapp.com</a></p>
+  </main>
+
+  <script>
+    // Hamburger toggle
+    (function(){ var b=document.querySelector('.nav-toggle'); var n=document.getElementById('primary-nav');
+      if(!b||!n) return; b.addEventListener('click',function(){ var e=b.getAttribute('aria-expanded')==='true';
+      b.setAttribute('aria-expanded', String(!e)); n.setAttribute('aria-expanded', String(!e)); }); })();
+
+    // Dynamic Effective Date (America/Denver)
+    (function(){
+      var tz='America/Denver', now=new Date();
+      var readable=new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'long',day:'numeric'}).format(now);
+      var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'})
+        .formatToParts(now).reduce(function(a,p){a[p.type]=p.value;return a;},{});
+      var iso=parts.year+'-'+parts.month+'-'+parts.day;
+      var el=document.getElementById('terms-effective-date'); if(el){ el.textContent=readable; el.setAttribute('datetime',iso); }
+    })();
+  </script>
 </body>
 </html>
