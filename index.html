@@ -403,6 +403,144 @@
             box-shadow: var(--shadow);
             text-align: left;
         }
+
+
+        /* ===== Screenshot Carousel (under the main container) ===== */
+        .pp-carousel {
+            max-width: var(--container-max);
+            margin: var(--space-5) auto;
+            padding: var(--space-4);
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .pp-carousel-header {
+            margin: 0 0 var(--space-3);
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .pp-carousel-viewport {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            /* Portrait mobile screenshots default; adjust as you like */
+            aspect-ratio: 9 / 19.5;
+            /* Supported widely; fallback below */
+            background: #eef4ff;
+        }
+
+        /* Fallback for browsers without aspect-ratio support */
+        @supports not (aspect-ratio: 1 / 1) {
+            .pp-carousel-viewport::before {
+                content: "";
+                display: block;
+                padding-top: calc(100% * 19.5 / 9);
+            }
+
+            .pp-carousel-track {
+                position: absolute;
+                inset: 0;
+            }
+        }
+
+        .pp-carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 400ms ease;
+            will-change: transform;
+            touch-action: pan-y;
+        }
+
+        .pp-carousel-slide {
+            flex: 0 0 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .pp-carousel-slide img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+            /* keeps phone screenshot crisp without cropping */
+            display: block;
+        }
+
+        .pp-carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            appearance: none;
+            border: 0;
+            background: rgba(0, 0, 0, .45);
+            color: #fff;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+        }
+
+        .pp-carousel-arrow:hover {
+            background: rgba(0, 0, 0, .6);
+        }
+
+        .pp-carousel-arrow:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .pp-carousel-prev {
+            left: 10px;
+        }
+
+        .pp-carousel-next {
+            right: 10px;
+        }
+
+        .pp-carousel-arrow svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .pp-carousel-dots {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: var(--space-3);
+        }
+
+        .pp-carousel-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #bcd7ff;
+            background: #dcebff;
+            cursor: pointer;
+        }
+
+        .pp-carousel-dot[aria-selected="true"] {
+            background: var(--brand);
+            border-color: var(--brand);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .pp-carousel-arrow {
+                width: 48px;
+                height: 48px;
+            }
+
+            .pp-carousel-arrow svg {
+                width: 26px;
+                height: 26px;
+            }
+        }
     </style>
 </head>
 
@@ -466,12 +604,70 @@
         </div>
     </div>
 
+    <!-- ===== Main content ===== -->
     <main class="container">
         <h1>Welcome to PawPrints</h1>
         <p>Your ultimate social platform for pet lovers!</p>
         <p>Connect with pet owners, share your pet’s journey, and find playmates for your furry friends.</p>
         <p>Sign up today and become part of the PawPrints community!</p>
     </main>
+
+    <!-- ===== Screenshot Carousel (under welcome container) ===== -->
+    <section class="pp-carousel" aria-roledescription="carousel" aria-label="PawPrints app screenshots">
+        <h2 class="pp-carousel-header">See the app in action</h2>
+
+        <div class="pp-carousel-viewport" tabindex="0" aria-live="polite">
+            <ul class="pp-carousel-track" role="listbox">
+                <!-- Slide 1 -->
+                <li class="pp-carousel-slide" role="option" aria-label="Screenshot 1 of 5" aria-selected="true">
+                    <img src="/assets/screens/screen1.jpg" alt="Home feed showing pet posts" loading="lazy" />
+                </li>
+                <!-- Slide 2 -->
+                <li class="pp-carousel-slide" role="option" aria-label="Screenshot 2 of 5" aria-selected="false">
+                    <img src="/assets/screens/screen2.jpg" alt="Create a new post editor" loading="lazy" />
+                </li>
+                <!-- Slide 3 -->
+                <li class="pp-carousel-slide" role="option" aria-label="Screenshot 3 of 5" aria-selected="false">
+                    <img src="/assets/screens/screen3.jpg" alt="Pet profile page" loading="lazy" />
+                </li>
+                <!-- Slide 4 -->
+                <li class="pp-carousel-slide" role="option" aria-label="Screenshot 4 of 5" aria-selected="false">
+                    <img src="/assets/screens/screen4.jpg" alt="Messages view" loading="lazy" />
+                </li>
+                <!-- Slide 5 -->
+                <li class="pp-carousel-slide" role="option" aria-label="Screenshot 5 of 5" aria-selected="false">
+                    <img src="/assets/screens/screen5.jpg" alt="Nearby playmates map" loading="lazy" />
+                </li>
+            </ul>
+
+            <!-- Arrows -->
+            <button class="pp-carousel-arrow pp-carousel-prev" type="button" aria-label="Previous screenshot">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+            <button class="pp-carousel-arrow pp-carousel-next" type="button" aria-label="Next screenshot">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m10 6 1.41 1.41L7.83 11H18v2H7.83l3.58 3.59L10 18l-6-6 6-6z" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Dots -->
+        <div class="pp-carousel-dots" role="tablist" aria-label="Choose screenshot">
+            <button class="pp-carousel-dot" role="tab" aria-selected="true" aria-controls="slide-1"
+                tabindex="0"></button>
+            <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-2"
+                tabindex="-1"></button>
+            <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-3"
+                tabindex="-1"></button>
+            <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-4"
+                tabindex="-1"></button>
+            <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-5"
+                tabindex="-1"></button>
+        </div>
+    </section>
+
 
     <!-- ===== Shared header JS (width-aware collapse + slide-out) ===== -->
     <script>
@@ -535,6 +731,100 @@
                     if (sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') { e.preventDefault(); closeMenu(); }
                 });
             }
+
+            /* ===== Screenshot Carousel ===== */
+            var root = document.querySelector('.pp-carousel');
+            if (!root) return;
+
+            var viewport = root.querySelector('.pp-carousel-viewport');
+            var track = root.querySelector('.pp-carousel-track');
+            var slides = Array.from(root.querySelectorAll('.pp-carousel-slide'));
+            var prevBtn = root.querySelector('.pp-carousel-prev');
+            var nextBtn = root.querySelector('.pp-carousel-next');
+            var dots = Array.from(root.querySelectorAll('.pp-carousel-dot'));
+
+            var index = 0;
+            var count = slides.length;
+            var autoMs = 4000;
+            var autoTimer = null;
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function goTo(i, userInitiated) {
+                index = (i + count) % count;
+                track.style.transform = 'translateX(' + (-100 * index) + '%)';
+
+                // Update aria-selected for slides & dots
+                slides.forEach(function (s, j) { s.setAttribute('aria-selected', j === index ? 'true' : 'false'); });
+                dots.forEach(function (d, j) {
+                    d.setAttribute('aria-selected', j === index ? 'true' : 'false');
+                    d.tabIndex = j === index ? 0 : -1;
+                });
+
+                // If user interacted, reset the timer so it doesn't immediately flip
+                if (userInitiated) restartAuto();
+            }
+
+            function next(userInitiated) { goTo(index + 1, userInitiated); }
+            function prev(userInitiated) { goTo(index - 1, userInitiated); }
+
+            function startAuto() {
+                if (reduceMotion) return;      // Respect user preference
+                if (autoTimer) return;
+                autoTimer = setInterval(function () { next(false); }, autoMs);
+            }
+            function stopAuto() {
+                if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+            }
+            function restartAuto() { stopAuto(); startAuto(); }
+
+            // Buttons
+            nextBtn.addEventListener('click', function () { next(true); });
+            prevBtn.addEventListener('click', function () { prev(true); });
+
+            // Keyboard (left/right on the focusable viewport)
+            viewport.addEventListener('keydown', function (e) {
+                if (e.key === 'ArrowRight') { e.preventDefault(); next(true); }
+                if (e.key === 'ArrowLeft') { e.preventDefault(); prev(true); }
+            });
+
+            // Dots
+            dots.forEach(function (d, j) {
+                d.addEventListener('click', function () { goTo(j, true); });
+            });
+
+            // Pause on hover/focus; resume on leave/blur
+            root.addEventListener('mouseenter', stopAuto);
+            root.addEventListener('mouseleave', startAuto);
+            root.addEventListener('focusin', stopAuto);
+            root.addEventListener('focusout', startAuto);
+
+            // Touch swipe
+            var startX = 0, dx = 0, dragging = false;
+            var threshold = 30; // px
+            viewport.addEventListener('touchstart', function (e) {
+                if (!e.touches[0]) return;
+                dragging = true; startX = e.touches[0].clientX; dx = 0;
+                stopAuto();
+            }, { passive: true });
+            viewport.addEventListener('touchmove', function (e) {
+                if (!dragging || !e.touches[0]) return;
+                dx = e.touches[0].clientX - startX;
+            }, { passive: true });
+            viewport.addEventListener('touchend', function () {
+                if (!dragging) return; dragging = false;
+                if (Math.abs(dx) > threshold) { (dx < 0 ? next(true) : prev(true)); }
+                startAuto();
+            });
+
+            // Init
+            goTo(0, false);
+            startAuto();
+
+            // Update on reduce-motion change
+            window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', function (e) {
+                reduceMotion = e.matches;
+                if (reduceMotion) stopAuto(); else startAuto();
+            });
         })();
     </script>
 </body>
