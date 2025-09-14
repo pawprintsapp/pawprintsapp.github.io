@@ -55,9 +55,32 @@
             --space-5: 28px;
 
             /* Carousel Image Size */
-             --shot-max-w: 1242px;
-  --shot-max-h: 2688px;
+            --shot-max-w: 1242px;
+            /* hard pixel cap (optional, for very large desktops) */
+            --shot-max-h: 2688px;
+            --shot-vh: 65vh;
+            /* << main control: ~65% of the viewport height */
+            --shot-min: 360px;
+            /* minimum rendered height (prevents too-tiny on short viewports) */
+            --shot-max: 900px;
+            /* maximum rendered height (caps on huge monitors) */
         }
+
+        /* Tiny phones: make screenshots a bit shorter to keep arrows/text visible */
+        @media (max-width: 380px) {
+            :root {
+                --shot-vh: 58vh;
+            }
+        }
+
+        /* Landscape devices: usually need less height */
+        @media (orientation: landscape) {
+            :root {
+                --shot-vh: 55vh;
+                --shot-max: 700px;
+            }
+        }
+
 
         body {
             margin: 0;
@@ -426,20 +449,13 @@
             font-weight: 800;
         }
 
-        .pp-carousel-viewport{
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
+        .pp-carousel-viewport {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            background: #eef4ff;
+        }
 
-  /* Use the iOS portrait screenshot ratio and hard caps */
-  aspect-ratio: 1242 / 2688;
-  width: 100%;
-  max-width: var(--shot-max-w);
-  max-height: var(--shot-max-h);
-
-  margin-inline: auto;          /* keep it centered */
-  background: #eef4ff;
-}
         /* Fallback for browsers without aspect-ratio support */
         @supports not (aspect-ratio: 1 / 1) {
             .pp-carousel-viewport::before {
@@ -456,7 +472,7 @@
 
         .pp-carousel-track {
             display: flex;
-            height: 100%;
+            /* REMOVE previous: height: 100%; */
             transition: transform 400ms ease;
             will-change: transform;
             touch-action: pan-y;
@@ -464,26 +480,28 @@
 
         .pp-carousel-slide {
             flex: 0 0 100%;
-            height: 100%;
             display: grid;
             place-items: center;
+            padding: 12px;
+            /* small inner gutter so the image “floats” a bit */
             overflow: hidden;
-            user-select: none;
         }
 
-       .pp-carousel-slide img{
-  /* Never render larger than 1242×2688 */
-  max-width: var(--shot-max-w);
-  max-height: var(--shot-max-h);
 
-  /* Fill the viewport but keep the whole screenshot visible */
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+        .pp-carousel-slide img {
+            /* Make the image shorter so it always fits on screen */
+            height: clamp(var(--shot-min), var(--shot-vh), var(--shot-max));
+            width: auto;
+            /* keep aspect ratio */
+            max-height: min(var(--shot-vh), var(--shot-max-h));
+            max-width: min(100%, var(--shot-max-w));
 
-  display: block;
-}
-
+            object-fit: contain;
+            /* show entire screenshot, no cropping */
+            display: block;
+            margin-inline: auto;
+            /* center horizontally */
+        }
 
         .pp-carousel-arrow {
             position: absolute;
@@ -661,15 +679,19 @@
 
             <!-- Arrows -->
             <button class="pp-carousel-arrow pp-carousel-prev" type="button" aria-label="Previous screenshot">
+                <!-- Left arrow (Material-style) -->
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
                 </svg>
             </button>
+
             <button class="pp-carousel-arrow pp-carousel-next" type="button" aria-label="Next screenshot">
+                <!-- Right arrow (Material-style) -->
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m10 6 1.41 1.41L7.83 11H18v2H7.83l3.58 3.59L10 18l-6-6 6-6z" />
+                    <path d="M8.59 16.59 13.17 12 8.59 7.41 10 6l6 6-6 6z" />
                 </svg>
             </button>
+
         </div>
 
         <!-- Dots -->
@@ -689,7 +711,7 @@
             <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-5"
                 tabindex="-1"></button>
         </div>
-    
+
     </section>
 
     <!-- ===== Shared header JS (width-aware collapse + slide-out) ===== -->
