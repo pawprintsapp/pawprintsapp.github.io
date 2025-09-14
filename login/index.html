@@ -1,206 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>PawPrints | Account</title>
-  <style>
-    :root{
-      --brand:#2196F3; --brand-2:#64b5f6; --brand-3:#1976D2;
-      --bg:#f6fbff; --card:#fff; --fg:#0a0a0a; --muted:#5b6b7b;
-      --radius:12px; --shadow:0 10px 30px rgba(3,27,78,.08);
-    }
-    *{ box-sizing:border-box }
-    html,body{ margin:0; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial; color:var(--fg); background:var(--bg); }
-    header{ background:var(--brand); color:#fff; padding:20px 16px; text-align:center; font-weight:800; }
-    .shell{ max-width:860px; margin:36px auto; padding:0 16px; }
-    .card{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; }
-    h1{ margin:0 0 16px; font-size:24px }
-    h2{ margin:20px 0 8px; font-size:18px }
-    label{ display:block; font-weight:600; margin:12px 0 6px }
-    input[type="email"],input[type="password"]{ width:100%; padding:12px 14px; border:1px solid #e3e8ef; border-radius:10px; }
-    button{ appearance:none; border:0; background:var(--brand); color:#fff; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer; }
-    button.secondary{ background:#eef4ff; color:#1f2d3d }
-    button.danger{ background:#e11d48 }
-    button[disabled]{ opacity:.6; cursor:not-allowed }
-    .row{ display:flex; gap:12px; flex-wrap:wrap }
-    .muted{ color:var(--muted) }
-    .stack{ display:grid; gap:12px }
-    .divider{ height:1px; background:#eef2f7; margin:16px 0 }
-    .danger-box{ border:1px solid #ffe1e5; background:#fff5f7; border-radius:10px; padding:12px }
-    .status{ white-space:pre-line; background:#0b1020; color:#e6f0ff; border-radius:10px; padding:12px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px }
-    .brandline{ display:flex; align-items:center; gap:10px; margin-bottom:12px; }
-    .brandline .logo{ font-size:20px }
-    .spacer{ flex:1 }
-    .center{ display:flex; align-items:center; gap:10px; flex-wrap:wrap }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>PawPrints | Account</title>
+    <style>
+        :root {
+            --brand: #2196F3;
+            --brand-2: #64b5f6;
+            --brand-3: #1976D2;
+            --bg: #f6fbff;
+            --card: #fff;
+            --fg: #0a0a0a;
+            --muted: #5b6b7b;
+            --radius: 12px;
+            --shadow: 0 10px 30px rgba(3, 27, 78, .08);
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            color: var(--fg);
+            background: var(--bg);
+        }
+
+        header {
+            background: var(--brand);
+            color: #fff;
+            padding: 20px 16px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .shell {
+            max-width: 860px;
+            margin: 36px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 24px
+        }
+
+        h2 {
+            margin: 20px 0 8px;
+            font-size: 18px
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 12px 0 6px
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e3e8ef;
+            border-radius: 10px;
+        }
+
+        button {
+            appearance: none;
+            border: 0;
+            background: var(--brand);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #eef4ff;
+            color: #1f2d3d
+        }
+
+        button.danger {
+            background: #e11d48
+        }
+
+        button[disabled] {
+            opacity: .6;
+            cursor: not-allowed
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .stack {
+            display: grid;
+            gap: 12px
+        }
+
+        .divider {
+            height: 1px;
+            background: #eef2f7;
+            margin: 16px 0
+        }
+
+        .danger-box {
+            border: 1px solid #ffe1e5;
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px
+        }
+
+        .status {
+            white-space: pre-line;
+            background: #0b1020;
+            color: #e6f0ff;
+            border-radius: 10px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 13px
+        }
+
+        .brandline {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .brandline .logo {
+            font-size: 20px
+        }
+
+        .spacer {
+            flex: 1
+        }
+
+        .center {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+    </style>
 </head>
+
 <body>
-  <header>
-    <div class="brandline">
-      <span class="logo" aria-hidden="true">🐾</span>
-      <span>PawPrints Account Portal</span>
-    </div>
-  </header>
-
-  <div class="shell stack">
-
-    <div class="card stack" id="authCard">
-      <h1>Sign in</h1>
-
-      <div class="row">
-        <button id="googleBtn" class="secondary" type="button">Continue with Google</button>
-        <button id="facebookBtn" class="secondary" type="button">Continue with Facebook</button>
-        <button id="appleBtn" class="secondary" type="button">Continue with Apple</button>
-      </div>
-
-      <div class="divider"></div>
-
-      <form id="emailForm" class="stack">
-        <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="email" required />
-
-        <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" required />
-
-        <div class="row">
-          <button id="emailSignInBtn" type="submit">Sign in</button>
-          <button id="signOutBtn" class="secondary" type="button" disabled>Sign out</button>
+    <header>
+        <div class="brandline">
+            <span class="logo" aria-hidden="true">🐾</span>
+            <span>PawPrints Account Portal</span>
         </div>
-        <p class="muted">No account? Create one in the PawPrints app, then return here.</p>
-      </form>
+    </header>
+
+    <div class="shell stack">
+
+        <div class="card stack" id="authCard">
+            <h1>Sign in</h1>
+
+            <div class="row">
+                <button id="googleBtn" class="secondary" type="button">Continue with Google</button>
+                <button id="facebookBtn" class="secondary" type="button">Continue with Facebook</button>
+                <button id="appleBtn" class="secondary" type="button">Continue with Apple</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <form id="emailForm" class="stack">
+                <label for="email">Email</label>
+                <input id="email" type="email" autocomplete="email" required />
+
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="current-password" required />
+
+                <div class="row">
+                    <button id="emailSignInBtn" type="submit">Sign in</button>
+                    <button id="signOutBtn" class="secondary" type="button" disabled>Sign out</button>
+                </div>
+                <p class="muted">No account? Create one in the PawPrints app, then return here.</p>
+            </form>
+        </div>
+
+        <div class="card stack" id="meCard" hidden>
+            <h2>Your session</h2>
+            <div class="center">
+                <div><strong>Status:</strong> <span id="authStatus">Signed out</span></div>
+                <div class="spacer"></div>
+                <div><strong>UID:</strong> <span id="uid">–</span></div>
+            </div>
+            <div class="status" id="log" aria-live="polite"></div>
+        </div>
+
+        <div class="card stack" id="dangerCard" hidden>
+            <h2>Delete account &amp; data</h2>
+            <div class="danger-box">
+                <p><strong>Warning:</strong> This action permanently deletes your PawPrints account and all associated
+                    data (auth, profile, uploads, etc.). This cannot be undone.</p>
+            </div>
+
+            <label><input type="checkbox" id="confirmChk" /> I understand this is permanent.</label>
+
+            <div class="row">
+                <button id="deleteBtn" class="danger" type="button" disabled>Delete my account &amp; data</button>
+                <button id="reauthBtn" class="secondary" type="button" disabled>Re-verify identity</button>
+            </div>
+            <p class="muted">If asked, please re-enter your password or complete provider sign-in again so we can verify
+                it’s really you.</p>
+        </div>
+
     </div>
 
-    <div class="card stack" id="meCard" hidden>
-      <h2>Your session</h2>
-      <div class="center">
-        <div><strong>Status:</strong> <span id="authStatus">Signed out</span></div>
-        <div class="spacer"></div>
-        <div><strong>UID:</strong> <span id="uid">–</span></div>
-      </div>
-      <div class="status" id="log" aria-live="polite"></div>
-    </div>
+    <!-- Firebase Web SDK (modular). -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import { initializeAppCheck, ReCaptchaV3Provider }
+            from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app-check.js";
 
-    <div class="card stack" id="dangerCard" hidden>
-      <h2>Delete account &amp; data</h2>
-      <div class="danger-box">
-        <p><strong>Warning:</strong> This action permanently deletes your PawPrints account and all associated data (auth, profile, uploads, etc.). This cannot be undone.</p>
-      </div>
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import {
+            getAuth, onAuthStateChanged,
+            GoogleAuthProvider, FacebookAuthProvider, OAuthProvider,
+            signInWithPopup, signInWithEmailAndPassword, signOut,
+            reauthenticateWithPopup, reauthenticateWithCredential, EmailAuthProvider
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
 
-      <label><input type="checkbox" id="confirmChk" /> I understand this is permanent.</label>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD3kJ7acMyRf20czeuchumKmZGI903HKXk",
+            authDomain: "pawprints-58331.firebaseapp.com",
+            databaseURL: "https://pawprints-58331-default-rtdb.firebaseio.com",
+            projectId: "pawprints-58331",
+            storageBucket: "pawprints-58331.firebasestorage.app",
+            messagingSenderId: "866043739451",
+            appId: "1:866043739451:web:abd46943ed6862b77acb1e",
+            measurementId: "G-919JP2VEYE"
+        };
 
-      <div class="row">
-        <button id="deleteBtn" class="danger" type="button" disabled>Delete my account &amp; data</button>
-        <button id="reauthBtn" class="secondary" type="button" disabled>Re-verify identity</button>
-      </div>
-      <p class="muted">If asked, please re-enter your password or complete provider sign-in again so we can verify it’s really you.</p>
-    </div>
+        const app = initializeApp(firebaseConfig);
+        const appCheck = initializeAppCheck(app, {
+            provider: new ReCaptchaV3Provider("YOUR_RECAPTCHA_V3_SITE_KEY"),
+            isTokenAutoRefreshEnabled: true,
+        });
+        const auth = getAuth(app);
 
-  </div>
+        const functions = getFunctions(app, "us-central1");
+        const callDelete = httpsCallable(functions, "deleteAccountAndData");
 
-  <!-- Firebase Web SDK (modular). -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import {
-      getAuth, onAuthStateChanged,
-      GoogleAuthProvider, FacebookAuthProvider, OAuthProvider,
-      signInWithPopup, signInWithEmailAndPassword, signOut,
-      reauthenticateWithPopup, reauthenticateWithCredential, EmailAuthProvider
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
+        const $ = (s) => document.querySelector(s);
+        const logEl = $("#log");
+        const log = (m) => { const t = new Date().toLocaleTimeString(); logEl.textContent = `[${t}] ${m}\n` + logEl.textContent; };
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyD3kJ7acMyRf20czeuchumKmZGI903HKXk",
-      authDomain: "pawprints-58331.firebaseapp.com",
-      databaseURL: "https://pawprints-58331-default-rtdb.firebaseio.com",
-      projectId: "pawprints-58331",
-      storageBucket: "pawprints-58331.firebasestorage.app",
-      messagingSenderId: "866043739451",
-      appId: "1:866043739451:web:abd46943ed6862b77acb1e",
-      measurementId: "G-919JP2VEYE"
-    };
+        const emailForm = $("#emailForm"), emailInp = $("#email"), passInp = $("#password"), emailBtn = $("#emailSignInBtn");
+        const googleBtn = $("#googleBtn"), facebookBtn = $("#facebookBtn"), appleBtn = $("#appleBtn");
+        const signOutBtn = $("#signOutBtn");
+        const confirmChk = $("#confirmChk"), deleteBtn = $("#deleteBtn"), reauthBtn = $("#reauthBtn");
+        const authStatus = $("#authStatus"), uidEl = $("#uid");
+        const meCard = $("#meCard"), dangerCard = $("#dangerCard");
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+        // Sign-in
+        googleBtn.onclick = async () => { googleBtn.disabled = true; try { await signInWithPopup(auth, new GoogleAuthProvider()); } catch (e) { log(`Google sign-in error: ${e.code || ""} ${e.message || e}`); alert("Google sign-in failed."); } finally { googleBtn.disabled = false; } };
+        facebookBtn.onclick = async () => { facebookBtn.disabled = true; try { await signInWithPopup(auth, new FacebookAuthProvider()); } catch (e) { log(`Facebook sign-in error: ${e.code || ""} ${e.message || e}`); alert("Facebook sign-in failed."); } finally { facebookBtn.disabled = false; } };
+        appleBtn.onclick = async () => { appleBtn.disabled = true; try { await signInWithPopup(auth, new OAuthProvider('apple.com')); } catch (e) { log(`Apple sign-in error: ${e.code || ""} ${e.message || e}`); alert("Apple sign-in failed."); } finally { appleBtn.disabled = false; } };
+        emailForm.onsubmit = async (e) => { e.preventDefault(); emailBtn.disabled = true; try { await signInWithEmailAndPassword(auth, emailInp.value, passInp.value); } catch (e) { log(`Email sign-in error: ${e.code || ""} ${e.message || e}`); alert("Email sign-in failed."); } finally { emailBtn.disabled = false; } };
+        signOutBtn.onclick = async () => { signOutBtn.disabled = true; try { await signOut(auth); } catch (e) { log(`Sign out error: ${e.message || e}`); } finally { signOutBtn.disabled = false; } };
 
-    const functions = getFunctions(app, "us-central1");
-    const callDelete = httpsCallable(functions, "deleteAccountAndData");
-
-    const $ = (s)=>document.querySelector(s);
-    const logEl = $("#log");
-    const log = (m)=>{ const t=new Date().toLocaleTimeString(); logEl.textContent = `[${t}] ${m}\n` + logEl.textContent; };
-
-    const emailForm = $("#emailForm"), emailInp=$("#email"), passInp=$("#password"), emailBtn=$("#emailSignInBtn");
-    const googleBtn=$("#googleBtn"), facebookBtn=$("#facebookBtn"), appleBtn=$("#appleBtn");
-    const signOutBtn=$("#signOutBtn");
-    const confirmChk=$("#confirmChk"), deleteBtn=$("#deleteBtn"), reauthBtn=$("#reauthBtn");
-    const authStatus=$("#authStatus"), uidEl=$("#uid");
-    const meCard=$("#meCard"), dangerCard=$("#dangerCard");
-
-    // Sign-in
-    googleBtn.onclick = async () => { googleBtn.disabled=true; try { await signInWithPopup(auth, new GoogleAuthProvider()); } catch(e){ log(`Google sign-in error: ${e.code||""} ${e.message||e}`); alert("Google sign-in failed."); } finally { googleBtn.disabled=false; } };
-    facebookBtn.onclick = async () => { facebookBtn.disabled=true; try { await signInWithPopup(auth, new FacebookAuthProvider()); } catch(e){ log(`Facebook sign-in error: ${e.code||""} ${e.message||e}`); alert("Facebook sign-in failed."); } finally { facebookBtn.disabled=false; } };
-    appleBtn.onclick = async () => { appleBtn.disabled=true; try { await signInWithPopup(auth, new OAuthProvider('apple.com')); } catch(e){ log(`Apple sign-in error: ${e.code||""} ${e.message||e}`); alert("Apple sign-in failed."); } finally { appleBtn.disabled=false; } };
-    emailForm.onsubmit = async (e)=>{ e.preventDefault(); emailBtn.disabled=true; try{ await signInWithEmailAndPassword(auth, emailInp.value, passInp.value); } catch(e){ log(`Email sign-in error: ${e.code||""} ${e.message||e}`); alert("Email sign-in failed."); } finally { emailBtn.disabled=false; } };
-    signOutBtn.onclick = async ()=>{ signOutBtn.disabled=true; try{ await signOut(auth); } catch(e){ log(`Sign out error: ${e.message||e}`); } finally { signOutBtn.disabled=false; } };
-
-    // Re-auth
-    async function ensureRecentLogin(user){
-      try{
-        const pid = user.providerData[0]?.providerId || "password";
-        if (pid === "password") {
-          const pwd = prompt("For your security, please re-enter your password:");
-          if (!pwd) throw new Error("Re-auth cancelled.");
-          const cred = EmailAuthProvider.credential(user.email, pwd);
-          await reauthenticateWithCredential(user, cred);
-        } else {
-          let p;
-          if (pid==="google.com") p=new GoogleAuthProvider();
-          else if (pid==="facebook.com") p=new FacebookAuthProvider();
-          else if (pid==="apple.com") p=new OAuthProvider("apple.com");
-          else p=new GoogleAuthProvider();
-          await reauthenticateWithPopup(user, p);
+        // Re-auth
+        async function ensureRecentLogin(user) {
+            try {
+                const pid = user.providerData[0]?.providerId || "password";
+                if (pid === "password") {
+                    const pwd = prompt("For your security, please re-enter your password:");
+                    if (!pwd) throw new Error("Re-auth cancelled.");
+                    const cred = EmailAuthProvider.credential(user.email, pwd);
+                    await reauthenticateWithCredential(user, cred);
+                } else {
+                    let p;
+                    if (pid === "google.com") p = new GoogleAuthProvider();
+                    else if (pid === "facebook.com") p = new FacebookAuthProvider();
+                    else if (pid === "apple.com") p = new OAuthProvider("apple.com");
+                    else p = new GoogleAuthProvider();
+                    await reauthenticateWithPopup(user, p);
+                }
+                return true;
+            } catch (e) { log(`Re-auth failed: ${e.code || ""} ${e.message || e}`); alert("We couldn’t verify your identity. Please try again."); return false; }
         }
-        return true;
-      } catch(e){ log(`Re-auth failed: ${e.code||""} ${e.message||e}`); alert("We couldn’t verify your identity. Please try again."); return false; }
-    }
-    reauthBtn.onclick = async ()=>{ if(!auth.currentUser) return; reauthBtn.disabled=true; const ok=await ensureRecentLogin(auth.currentUser); if(ok) log("Identity verified."); reauthBtn.disabled=false; };
+        reauthBtn.onclick = async () => { if (!auth.currentUser) return; reauthBtn.disabled = true; const ok = await ensureRecentLogin(auth.currentUser); if (ok) log("Identity verified."); reauthBtn.disabled = false; };
 
-    // Delete via Cloud Function (which calls Render API, then Firebase deletions)
-    confirmChk.onchange = ()=>{ deleteBtn.disabled = !confirmChk.checked || !auth.currentUser; reauthBtn.disabled = !auth.currentUser; };
-    deleteBtn.onclick = async ()=>{
-      const user = auth.currentUser; if(!user) return;
-      deleteBtn.disabled = true;
-      const ok = await ensureRecentLogin(user); if(!ok){ deleteBtn.disabled=false; return; }
+        // Delete via Cloud Function (which calls Render API, then Firebase deletions)
+        confirmChk.onchange = () => { deleteBtn.disabled = !confirmChk.checked || !auth.currentUser; reauthBtn.disabled = !auth.currentUser; };
+        deleteBtn.onclick = async () => {
+            const user = auth.currentUser; if (!user) return;
+            deleteBtn.disabled = true;
+            const ok = await ensureRecentLogin(user); if (!ok) { deleteBtn.disabled = false; return; }
 
-      try{
-        log("Starting deletion: contacting Render API via Cloud Function…");
-        const res = await callDelete({}); // server knows uid via auth context
-        const { message, details } = (res && res.data) || {};
-        if (details && Array.isArray(details)) {
-          details.forEach((d)=> log(d));
-        }
-        log(message || "Server finished.");
-        await signOut(auth);
-        alert("Your account and data were deleted. Goodbye 💙");
-      } catch(e){
-        log(`Delete failed: ${e.code||""} ${e.message||e}`);
-        alert("We could not delete your account. See the log for details.");
-      } finally { deleteBtn.disabled = false; }
-    };
+            try {
+                log("Starting deletion: contacting Render API via Cloud Function…");
+                const res = await callDelete({}); // server knows uid via auth context
+                const { message, details } = (res && res.data) || {};
+                if (details && Array.isArray(details)) {
+                    details.forEach((d) => log(d));
+                }
+                log(message || "Server finished.");
+                await signOut(auth);
+                alert("Your account and data were deleted. Goodbye 💙");
+            } catch (e) {
+                log(`Delete failed: ${e.code || ""} ${e.message || e}`);
+                alert("We could not delete your account. See the log for details.");
+            } finally { deleteBtn.disabled = false; }
+        };
 
-    // Wiring
-    onAuthStateChanged(auth, (user)=>{
-      const signedIn = !!user;
-      uidEl.textContent = signedIn ? user.uid : "–";
-      authStatus.textContent = signedIn ? "Signed in" : "Signed out";
-      signOutBtn.disabled = !signedIn;
-      meCard.hidden = !signedIn;
-      dangerCard.hidden = !signedIn;
-      deleteBtn.disabled = !signedIn || !confirmChk.checked;
-      reauthBtn.disabled = !signedIn;
-      log(signedIn ? `Welcome, ${user.email || user.displayName || user.uid}` : "You are signed out.");
-    });
-  </script>
+        // Wiring
+        onAuthStateChanged(auth, (user) => {
+            const signedIn = !!user;
+            uidEl.textContent = signedIn ? user.uid : "–";
+            authStatus.textContent = signedIn ? "Signed in" : "Signed out";
+            signOutBtn.disabled = !signedIn;
+            meCard.hidden = !signedIn;
+            dangerCard.hidden = !signedIn;
+            deleteBtn.disabled = !signedIn || !confirmChk.checked;
+            reauthBtn.disabled = !signedIn;
+            log(signedIn ? `Welcome, ${user.email || user.displayName || user.uid}` : "You are signed out.");
+        });
+    </script>
 </body>
+
 </html>
