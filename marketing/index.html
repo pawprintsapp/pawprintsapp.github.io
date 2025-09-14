@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Marketing | PawPrints</title>
-   <style>
+    <meta charset="UTF-8" />
+    <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Marketing | PawPrints</title>
+    <style>
         /* ===== Base / Reset ===== */
         html {
             -webkit-text-size-adjust: 100%;
@@ -406,7 +407,7 @@
 </head>
 
 <body>
-    <header class="site-header">A Social Network for Pet Lovers</header>
+    <header class="site-header">Marketing</header>
 
     <!-- Menu bar: Brand styled as an item (left). Inline items center. JS collapses before overflow. -->
     <div class="nav-wrap">
@@ -465,37 +466,38 @@
         </div>
     </div>
 
-  <main class="container">
-    <h1>Why Choose PawPrints?</h1>
-    <p>🐾 Connect with other pet lovers near you</p>
-    <p>📍 Find pet-friendly parks and events</p>
-    <p>📸 Share adorable pet photos &amp; videos</p>
-    <p>💬 Chat and plan playdates with other pet owners</p>
-    <p>🔒 Secure &amp; easy-to-use platform</p>
+    <main class="container">
+        <h1>Why Choose PawPrints?</h1>
+        <p>🐾 Connect with other pet lovers near you</p>
+        <p>📍 Find pet-friendly parks and events</p>
+        <p>📸 Share adorable pet photos &amp; videos</p>
+        <p>💬 Chat and plan playdates with other pet owners</p>
+        <p>🔒 Secure &amp; easy-to-use platform</p>
 
-    <h2>Download Now!</h2>
-    <p>
-      Available on the
-      <a href="https://apps.apple.com" rel="noopener">App Store</a>
-      and
-      <a href="https://play.google.com" rel="noopener">Google Play</a>.
-    </p>
+        <h2>Download Now!</h2>
+        <p>
+            Available on the
+            <a href="https://apps.apple.com" rel="noopener">App Store</a>
+            and
+            <a href="https://play.google.com" rel="noopener">Google Play</a>.
+        </p>
 
-    <p class="cta">Join the PawPrints community today! 🐕🐾</p>
-  </main>
+        <p class="cta">Join the PawPrints community today! 🐕🐾</p>
+    </main>
 
-  <script>
-    // Accessible hamburger toggle
-    (function(){
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('primary-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        nav.setAttribute('aria-expanded', String(!expanded));
-      });
-    })();
-  </script>
+    <script>
+        // Accessible hamburger toggle
+        (function () {
+            var btn = document.querySelector('.nav-toggle');
+            var nav = document.getElementById('primary-nav');
+            if (!btn || !nav) return;
+            btn.addEventListener('click', function () {
+                var expanded = btn.getAttribute('aria-expanded') === 'true';
+                btn.setAttribute('aria-expanded', String(!expanded));
+                nav.setAttribute('aria-expanded', String(!expanded));
+            });
+        })();
+    </script>
 </body>
+
 </html>
