@@ -1,211 +1,466 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>PawPrints | Home</title>
-  <style>
-   html {
-        -webkit-text-size-adjust: 100%;
-        box-sizing: border-box;
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: inherit;
-      }
-      :root {
-        --brand: #2196f3;
-        --brand-2: #64b5f6;
-        --brand-3: #1976d2;
-        --bg: #e3f2fd;
-        --fg: #0a0a0a;
-        --card: #fff;
-        --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        --fs-body: clamp(15px, 1.5vw, 17px);
-        --fs-h1: clamp(22px, 4.2vw, 34px);
-        --fs-hdr: clamp(18px, 3.6vw, 28px);
-        --container-max: 800px;
-        --space-1: 8px;
-        --space-2: 12px;
-        --space-3: 16px;
-        --space-4: 20px;
-        --space-5: 28px;
-        --radius: 10px;
-      }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-          Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        line-height: 1.6;
-        color: var(--fg);
-        background: var(--bg);
-      }
-      header.site-header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: var(--brand);
-        color: #fff;
-        padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3)
-          var(--space-3);
-        text-align: center;
-        font-size: var(--fs-hdr);
-        font-weight: 700;
-      }
-      .nav-wrap {
-        background: var(--brand-2);
-        padding: var(--space-2);
-      }
-      .nav-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: var(--container-max);
-        margin: 0 auto;
-        gap: var(--space-2);
-      }
-      .nav-toggle {
-        appearance: none;
-        background: transparent;
-        border: 0;
-        padding: var(--space-1);
-        margin: -4px;
-        cursor: pointer;
-        border-radius: 8px;
-      }
-      .nav-toggle:focus-visible {
-        outline: 2px solid #fff;
-        outline-offset: 2px;
-      }
-      .nav-toggle svg {
-        width: 28px;
-        height: 28px;
-        display: block;
-        fill: #fff;
-      }
-      nav.primary {
-        width: 100%;
-      }
-      .nav-links {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 220ms ease;
-      }
-      .nav-links a {
-        display: block;
-        text-decoration: none;
-        text-align: center;
-        color: #fff;
-        font-weight: 700;
-        padding: 10px 14px;
-        border-radius: 6px;
-        background: transparent;
-        transition: background-color 160ms ease;
-        word-break: break-word;
-      }
-      .nav-links a:hover {
-        background: var(--brand-3);
-      }
-      nav.primary[aria-expanded="true"] .nav-links {
-        max-height: 100vh;
-      }
-      .container {
-        max-width: var(--container-max);
-        margin: var(--space-5) auto;
-        padding: var(--space-4);
-        background: var(--card);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        text-align: left;
-      }
-      h1 {
-        font-size: var(--fs-h1);
-        line-height: 1.25;
-        margin: 0 0 var(--space-3);
-      }
-      p,
-      li {
-        font-size: var(--fs-body);
-      }
-      ul {
-        padding-left: 20px;
-      }
-      @media (min-width: 640px) {
-        .nav-toggle {
-          display: none;
+    <meta charset="UTF-8" />
+    <!-- iPhone-friendly viewport + safe area -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>PawPrints | Home</title>
+    <style>
+        /* ===== Base / Reset ===== */
+        html {
+            -webkit-text-size-adjust: 100%;
+            box-sizing: border-box;
         }
-        .nav-links {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          gap: 14px 18px;
-          max-height: none !important;
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
         }
+
+        :root {
+            --brand: #2196F3;
+            --brand-2: #64b5f6;
+            --brand-3: #1976D2;
+            --bg: #e3f2fd;
+            --fg: #0a0a0a;
+            --card: #fff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, .1);
+
+            /* Fluid typography */
+            --fs-body: clamp(15px, 1.5vw, 17px);
+            --fs-h1: clamp(22px, 4.2vw, 34px);
+            --fs-hdr: clamp(18px, 3.6vw, 28px);
+            --fs-brand: clamp(18px, 2.4vw, 22px);
+
+            /* Nav sizing & spacing that scales with screen width */
+            --nav-h: clamp(56px, 7vw, 80px);
+            /* nav bar height */
+            --nav-gap: clamp(10px, 2.2vw, 26px);
+            /* gap between items grows on large screens */
+            --nav-pad-x: clamp(10px, 1.6vw, 18px);
+            /* link horizontal padding scales */
+            --nav-pad-y: clamp(8px, 0.9vw, 12px);
+            /* link vertical padding scales */
+
+            --container-max: 800px;
+            --space-1: 8px;
+            --space-2: 12px;
+            --space-3: 16px;
+            --space-4: 20px;
+            --space-5: 28px;
+            --radius: 10px;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            color: var(--fg);
+            background: var(--bg);
+        }
+
+        /* ===== Header banner (above the menu bar) ===== */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--brand);
+            color: #fff;
+            padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
+            text-align: center;
+            font-size: var(--fs-hdr);
+            font-weight: 700;
+        }
+
+        /* ===== Menu bar =====
+       Brand (left) styled exactly like a menu item.
+       Inline items are centered visually (margin:auto) and never wrap; JS collapses before overflow.
+    */
+        .nav-wrap {
+            background: var(--brand-2);
+        }
+
+        .nav-row {
+            display: flex;
+            align-items: center;
+            position: relative;
+            min-height: var(--nav-h);
+            padding: 0 var(--space-3);
+            gap: var(--nav-gap);
+        }
+
+        /* Brand: looks like a normal menu item (but is excluded from the slide-out) */
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 800;
+            line-height: 1;
+            font-size: var(--fs-brand);
+            border-radius: 8px;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            white-space: nowrap;
+            transition: background-color 160ms ease;
+            flex: 0 0 auto;
+            /* never shrink */
+        }
+
+        .brand-link:hover {
+            background: var(--brand-3);
+        }
+
+        .brand-link:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .brand-mark {
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        .brand-text {
+            letter-spacing: .2px;
+        }
+
+        /* Inline links (single row; never wrap; centered block) */
+        .nav-inline {
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            /* auto centers the whole block */
+            display: flex;
+            align-items: center;
+            gap: var(--nav-gap);
+            white-space: nowrap;
+            overflow: hidden;
+            /* avoid accidental paint beyond edges; JS collapses before this matters */
+            flex: 0 1 auto;
+        }
+
+        .nav-inline li {
+            display: inline-flex;
+        }
+
+        .nav-inline a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            border-radius: 8px;
+            transition: background-color 160ms ease;
+        }
+
+        .nav-inline a:hover {
+            background: var(--brand-3);
+        }
+
+        /* When collapsed, hide inline items */
+        .nav-row.is-collapsed .nav-inline {
+            display: none;
+        }
+
+        /* Menu button (always in DOM, only shown when collapsed) */
+        .menu-button {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            margin-left: auto;
+            /* push to far right when inline group is visible */
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            fill: #fff;
+        }
+
+        .nav-row.is-collapsed .menu-button {
+            display: inline-flex;
+        }
+
+        /* ===== Slide-in "All Menu Items" panel (brand intentionally omitted) ===== */
+        .menu-sheet {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            display: none;
+            background: rgba(0, 0, 0, .45);
+        }
+
+        .menu-sheet[aria-hidden="false"] {
+            display: block;
+        }
+
+        .menu-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: min(340px, 86vw);
+            height: 100%;
+            background: var(--card);
+            color: var(--fg);
+            box-shadow: -6px 0 18px rgba(0, 0, 0, .25);
+            transform: translateX(100%);
+            transition: transform 220ms ease;
+            display: flex;
+            flex-direction: column;
+            padding: calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
+        }
+
+        .menu-sheet[aria-hidden="false"] .menu-panel {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .menu-title {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .menu-close {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .menu-close:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        .menu-close svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 8px 0 0 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .menu-list a {
+            display: block;
+            text-decoration: none;
+            color: var(--fg);
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #f7fbff;
+            border: 1px solid #e3f2fd;
+        }
+
+        .menu-list a:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        /* ===== Page content ===== */
         .container {
-          padding: 32px;
+            max-width: var(--container-max);
+            margin: var(--space-5) auto;
+            padding: var(--space-4);
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: left;
         }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .nav-links {
-          transition: none;
+
+        h1 {
+            font-size: var(--fs-h1);
+            line-height: 1.25;
+            margin: 0 0 var(--space-3);
         }
-      }
-      .safe-bottom {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
-  </style>
+
+        p,
+        li {
+            font-size: var(--fs-body);
+            margin: 0 0 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .menu-panel {
+                transition: none;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header class="site-header">PawPrints - A Social Network for Pet Lovers</header>
+    <header class="site-header">A Social Network for Pet Lovers</header>
 
-  <div class="nav-wrap safe-bottom">
-    <div class="nav-inner">
-      <!-- Hamburger (mobile only) -->
-      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-      </button>
+    <!-- Menu bar: Brand styled as an item (left). Inline items center. JS collapses before overflow. -->
+    <div class="nav-wrap">
+        <nav class="nav-row" id="nav-row" aria-label="Primary">
+            <!-- Brand (looks like another item) -->
+            <a class="brand-link" href="/" aria-label="PawPrints Home">
+                <span class="brand-mark" aria-hidden="true">🐾</span>
+                <span class="brand-text">PawPrints</span>
+            </a>
 
-      <nav id="primary-nav" class="primary" aria-expanded="false">
-        <ul class="nav-links">
-           <li><a href="/">Home</a></li>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/support">Support</a></li>
-          <li><a href="/terms">Terms &amp; Conditions</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/faq">FAQ</a></li>
-        </ul>
-      </nav>
+            <!-- Inline items (centered, single row). BRAND IS NOT DUPLICATED HERE. -->
+            <ul class="nav-inline" id="nav-inline">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/login">Login</a></li>
+
+            </ul>
+
+            <!-- Menu button appears only when collapsed (via JS) -->
+            <button class="menu-button" id="menu-button" aria-haspopup="dialog" aria-controls="menu-sheet"
+                aria-expanded="false" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+                </svg>
+            </button>
+        </nav>
     </div>
-  </div>
 
-  <main class="container">
-    <h1>Welcome to PawPrints</h1>
-    <p>Your ultimate social platform for pet lovers!</p>
-    <p>Connect with pet owners, share your pet’s journey, and find playmates for your furry friends.</p>
-    <p>Sign up today and become part of the PawPrints community!</p>
-  </main>
+    <!-- Slide-in panel for small screens (brand intentionally omitted) -->
+    <div class="menu-sheet" id="menu-sheet" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="menu-title">
+        <div class="menu-panel" role="document">
+            <div class="menu-header">
+                <h2 class="menu-title" id="menu-title">All Menu Items</h2>
+                <button class="menu-close" id="menu-close" aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M18.3 5.71 12 12l-6.3-6.29-1.41 1.42L10.59 13.4l-6.3 6.29 1.42 1.41L12 14.83l6.29 6.27 1.41-1.41-6.28-6.29 6.28-6.29z" />
+                    </svg>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/login">Login</a></li>
 
-  <script>
-    // Small, accessible hamburger toggle
-    (function () {
-      var btn = document.querySelector('.nav-toggle');
-      var nav = document.getElementById('primary-nav');
-      if (!btn || !nav) return;
-      btn.addEventListener('click', function () {
-        var expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        nav.setAttribute('aria-expanded', String(!expanded));
-      });
-    })();
-  </script>
+            </ul>
+        </div>
+    </div>
+
+    <main class="container">
+        <h1>Welcome to PawPrints</h1>
+        <p>Your ultimate social platform for pet lovers!</p>
+        <p>Connect with pet owners, share your pet’s journey, and find playmates for your furry friends.</p>
+        <p>Sign up today and become part of the PawPrints community!</p>
+    </main>
+
+    <script>
+        // ===== Dynamic overflow-aware nav collapse =====
+        (function () {
+            var row = document.getElementById('nav-row');
+            var inline = document.getElementById('nav-inline');
+            var brand = document.querySelector('.brand-link');
+            var menuBtn = document.getElementById('menu-button');
+
+            // Ensure a sensible minimum tappable width for the menu button
+            var MIN_MENU_BTN = 48; // px
+            var SAFETY = 8;        // px, to flip a tad before true overflow
+
+            function measureAndToggle() {
+                // Temporarily ensure inline is measurable
+                var prevDisplay = inline.style.display;
+                inline.style.display = 'flex';
+
+                var rowW = row.clientWidth;
+                var brandW = brand ? brand.offsetWidth : 0;
+
+                // If the button is currently hidden, assume its minimal width for the check
+                var btnW = (menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
+
+                // Full width needed to show brand + inline items + button (even if button is hidden we reserve it)
+                var needW = brandW + inline.scrollWidth + btnW + SAFETY;
+
+                var collapse = needW > rowW;
+
+                // Restore display and set collapsed state
+                inline.style.display = prevDisplay;
+                row.classList.toggle('is-collapsed', collapse);
+            }
+
+            // Recalculate on load, resize, orientation, font reflow, and content changes
+            window.addEventListener('load', measureAndToggle);
+            window.addEventListener('resize', measureAndToggle);
+            window.addEventListener('orientationchange', measureAndToggle);
+
+            // React to layout-affecting changes via ResizeObserver
+            var ro = new ResizeObserver(measureAndToggle);
+            ro.observe(row);
+            ro.observe(inline);
+            if (brand) ro.observe(brand);
+
+            // ===== Slide-in panel behavior with accessible focus management =====
+            var sheet = document.getElementById('menu-sheet');
+            var panel = sheet.querySelector('.menu-panel');
+            var closeBtn = document.getElementById('menu-close');
+            var firstLink = sheet.querySelector('.menu-list a');
+
+            function openMenu() {
+                sheet.setAttribute('aria-hidden', 'false');
+                menuBtn.setAttribute('aria-expanded', 'true');
+                setTimeout(function () { (firstLink || closeBtn).focus(); }, 0);
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                sheet.setAttribute('aria-hidden', 'true');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.focus();
+                document.body.style.overflow = '';
+            }
+
+            if (menuBtn && closeBtn && sheet && panel) {
+                menuBtn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                sheet.addEventListener('click', function (e) { if (!panel.contains(e.target)) closeMenu(); });
+                window.addEventListener('keydown', function (e) {
+                    if (sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') { e.preventDefault(); closeMenu(); }
+                });
+            }
+        })();
+    </script>
 </body>
+
 </html>

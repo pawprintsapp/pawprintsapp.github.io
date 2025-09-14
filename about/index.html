@@ -6,165 +6,156 @@
   <title>About Us | PawPrints</title>
   <style>
     html {
-        -webkit-text-size-adjust: 100%;
-        box-sizing: border-box;
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: inherit;
-      }
-      :root {
-        --brand: #2196f3;
-        --brand-2: #64b5f6;
-        --brand-3: #1976d2;
-        --bg: #e3f2fd;
-        --fg: #0a0a0a;
-        --card: #fff;
-        --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        --fs-body: clamp(15px, 1.5vw, 17px);
-        --fs-h1: clamp(22px, 4.2vw, 34px);
-        --fs-hdr: clamp(18px, 3.6vw, 28px);
-        --container-max: 800px;
-        --space-1: 8px;
-        --space-2: 12px;
-        --space-3: 16px;
-        --space-4: 20px;
-        --space-5: 28px;
-        --radius: 10px;
-      }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-          Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        line-height: 1.6;
-        color: var(--fg);
-        background: var(--bg);
-      }
-      header.site-header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        background: var(--brand);
-        color: #fff;
-        padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3)
-          var(--space-3);
-        text-align: center;
-        font-size: var(--fs-hdr);
-        font-weight: 700;
-      }
-      .nav-wrap {
-        background: var(--brand-2);
-        padding: var(--space-2);
-      }
-      .nav-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        max-width: var(--container-max);
-        margin: 0 auto;
-        gap: var(--space-2);
-      }
-      .nav-toggle {
-        appearance: none;
-        background: transparent;
-        border: 0;
-        padding: var(--space-1);
-        margin: -4px;
-        cursor: pointer;
-        border-radius: 8px;
-      }
-      .nav-toggle:focus-visible {
-        outline: 2px solid #fff;
-        outline-offset: 2px;
-      }
-      .nav-toggle svg {
-        width: 28px;
-        height: 28px;
-        display: block;
-        fill: #fff;
-      }
-      nav.primary {
-        width: 100%;
-      }
-      .nav-links {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 220ms ease;
-      }
-      .nav-links a {
-        display: block;
-        text-decoration: none;
-        text-align: center;
-        color: #fff;
-        font-weight: 700;
-        padding: 10px 14px;
-        border-radius: 6px;
-        background: transparent;
-        transition: background-color 160ms ease;
-        word-break: break-word;
-      }
-      .nav-links a:hover {
-        background: var(--brand-3);
-      }
-      nav.primary[aria-expanded="true"] .nav-links {
-        max-height: 100vh;
-      }
-      .container {
-        max-width: var(--container-max);
-        margin: var(--space-5) auto;
-        padding: var(--space-4);
-        background: var(--card);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        text-align: left;
-      }
-      h1 {
-        font-size: var(--fs-h1);
-        line-height: 1.25;
-        margin: 0 0 var(--space-3);
-      }
-      p,
-      li {
-        font-size: var(--fs-body);
-      }
-      ul {
-        padding-left: 20px;
-      }
-      @media (min-width: 640px) {
-        .nav-toggle {
-          display: none;
+            -webkit-text-size-adjust: 100%;
+            box-sizing: border-box;
+        }
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+        :root {
+            --brand: #2196f3;
+            --brand-2: #64b5f6;
+            --brand-3: #1976d2;
+            --bg: #e3f2fd;
+            --fg: #0a0a0a;
+            --card: #fff;
+            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --fs-body: clamp(15px, 1.5vw, 17px);
+            --fs-h1: clamp(22px, 4.2vw, 34px);
+            --fs-hdr: clamp(18px, 3.6vw, 28px);
+            --fs-brand: clamp(18px, 2.4vw, 22px);
+            --container-max: 800px;
+            --space-1: 8px;
+            --space-2: 12px;
+            --space-3: 16px;
+            --space-4: 20px;
+            --space-5: 28px;
+            --radius: 10px;
+        }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+                Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            color: var(--fg);
+            background: var(--bg);
+        }
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--brand);
+            color: #fff;
+            padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
+            text-align: center;
+            font-size: var(--fs-hdr);
+            font-weight: 700;
+        }
+        .nav-wrap {
+            background: var(--brand-2);
+            padding: 0;
+        }
+        .nav-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            width: 100%;
+            padding: 10px var(--space-3);
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .nav-row::-webkit-scrollbar {
+            display: none;
+        }
+        /* WebKit hide */
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 800;
+            line-height: 1;
+            font-size: var(--fs-brand);
+            border-radius: 8px;
+            padding: 6px 8px;
+            flex: 0 0 auto;
+        }
+        .brand:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+        .brand-mark {
+            font-size: 1.2em;
+            line-height: 1;
+        }
+        .brand-text {
+            letter-spacing: 0.2px;
         }
         .nav-links {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          align-items: center;
-          gap: 14px 18px;
-          max-height: none !important;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 0 0 auto;
+        }
+        .nav-links li {
+            flex: 0 0 auto;
+        }
+        .nav-links a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            padding: 10px 12px;
+            border-radius: 6px;
+            transition: background-color 160ms ease;
+        }
+        .nav-links a:hover {
+            background: var(--brand-3);
         }
         .container {
-          padding: 32px;
+            max-width: var(--container-max);
+            margin: var(--space-5) auto;
+            padding: var(--space-4);
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: left;
         }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .nav-links {
-          transition: none;
+        h1 {
+            font-size: var(--fs-h1);
+            line-height: 1.25;
+            margin: 0 0 var(--space-3);
         }
-      }
-      .safe-bottom {
-        padding-bottom: env(safe-area-inset-bottom);
-      }
+        p,
+        li {
+            font-size: var(--fs-body);
+            margin: 0 0 10px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        @media (max-width: 360px) {
+            .nav-links a {
+                padding: 8px 10px;
+            }
+        }
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
   </style>
 </head>
 <body>
-  <header class="site-header">PawPrints - About Us</header>
+  <header class="site-header">About Us</header>
 
   <div class="nav-wrap safe-bottom">
     <div class="nav-inner">
