@@ -7,146 +7,391 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>PawPrints | Home</title>
     <style>
-            /* ===== Base / Reset ===== */
-    html { -webkit-text-size-adjust: 100%; box-sizing: border-box; }
-    *, *::before, *::after { box-sizing: inherit; }
+        /* ===== Base / Reset ===== */
+        html {
+            -webkit-text-size-adjust: 100%;
+            box-sizing: border-box;
+        }
 
-    :root{
-      /* Brand palette shared with homepage header */
-      --brand:#2196F3; --brand-2:#64b5f6; --brand-3:#1976D2;
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
 
-      /* Page visuals (kept from your login page) */
-      --bg:#f6fbff; --card:#fff; --fg:#0a0a0a; --muted:#5b6b7b;
+        :root {
+            /* Brand palette shared with homepage header */
+            --brand: #2196F3;
+            --brand-2: #64b5f6;
+            --brand-3: #1976D2;
 
-      /* Header/Nav sizing & spacing that scales with screen width */
-      --fs-body:clamp(15px,1.5vw,17px);
-      --fs-h1:clamp(22px,4.2vw,34px);
-      --fs-hdr:clamp(18px,3.6vw,28px);
-      --fs-brand:clamp(18px,2.4vw,22px);
+            /* Page visuals (kept from your login page) */
+            --bg: #f6fbff;
+            --card: #fff;
+            --fg: #0a0a0a;
+            --muted: #5b6b7b;
 
-      --nav-h:clamp(56px,7vw,80px);      /* nav bar height */
-      --nav-gap:clamp(10px,2.2vw,26px);  /* gap grows on wide screens */
-      --nav-pad-x:clamp(10px,1.6vw,18px);
-      --nav-pad-y:clamp(8px,0.9vw,12px);
+            /* Header/Nav sizing & spacing that scales with screen width */
+            --fs-body: clamp(15px, 1.5vw, 17px);
+            --fs-h1: clamp(22px, 4.2vw, 34px);
+            --fs-hdr: clamp(18px, 3.6vw, 28px);
+            --fs-brand: clamp(18px, 2.4vw, 22px);
 
-      --container-max:860px;
-      --radius:12px; --shadow:0 10px 30px rgba(3,27,78,.08);
+            --nav-h: clamp(56px, 7vw, 80px);
+            /* nav bar height */
+            --nav-gap: clamp(10px, 2.2vw, 26px);
+            /* gap grows on wide screens */
+            --nav-pad-x: clamp(10px, 1.6vw, 18px);
+            --nav-pad-y: clamp(8px, 0.9vw, 12px);
 
-      --space-1:8px; --space-2:12px; --space-3:16px; --space-4:20px; --space-5:28px;
-    }
+            --container-max: 860px;
+            --radius: 12px;
+            --shadow: 0 10px 30px rgba(3, 27, 78, .08);
 
-    body{
-      margin:0;
-      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Apple Color Emoji","Segoe UI Emoji";
-      color:var(--fg);
-      background:var(--bg);
-      line-height:1.6;
-    }
+            --space-1: 8px;
+            --space-2: 12px;
+            --space-3: 16px;
+            --space-4: 20px;
+            --space-5: 28px;
+        }
 
-    /* ===== Top banner (exactly like home) ===== */
-    header.site-header{
-      position:sticky; top:0; z-index:1000;
-      background:var(--brand); color:#fff;
-      padding:calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
-      text-align:center; font-size:var(--fs-hdr); font-weight:700;
-    }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--fg);
+            background: var(--bg);
+            line-height: 1.6;
+        }
 
-    /* ===== Shared Menu Bar (copied from home) ===== */
-    .nav-wrap{ background:var(--brand-2); }
-    .nav-row{
-      display:flex; align-items:center; position:relative;
-      min-height:var(--nav-h);
-      padding:0 var(--space-3);
-      gap:var(--nav-gap);
-    }
+        /* ===== Top banner (exactly like home) ===== */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--brand);
+            color: #fff;
+            padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
+            text-align: center;
+            font-size: var(--fs-hdr);
+            font-weight: 700;
+        }
 
-    /* Brand styled like a peer menu item */
-    .brand-link{
-      display:inline-flex; align-items:center; gap:10px;
-      text-decoration:none; color:#fff; font-weight:800; line-height:1;
-      font-size:var(--fs-brand);
-      border-radius:8px; padding:var(--nav-pad-y) var(--nav-pad-x);
-      white-space:nowrap; transition:background-color 160ms ease;
-      flex:0 0 auto;
-    }
-    .brand-link:hover{ background:var(--brand-3); }
-    .brand-link:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
-    .brand-mark{ font-size:1.2em; line-height:1; }
-    .brand-text{ letter-spacing:.2px; }
+        /* ===== Shared Menu Bar (copied from home) ===== */
+        .nav-wrap {
+            background: var(--brand-2);
+        }
 
-    /* Centered inline items (hidden when collapsed) */
-    .nav-inline{
-      list-style:none; margin:0 auto; padding:0;
-      display:flex; align-items:center; gap:var(--nav-gap);
-      white-space:nowrap; overflow:hidden; flex:0 1 auto;
-    }
-    .nav-inline li{ display:inline-flex; }
-    .nav-inline a{
-      display:inline-block; text-decoration:none; color:#fff; font-weight:700;
-      padding:var(--nav-pad-y) var(--nav-pad-x); border-radius:8px;
-      transition:background-color 160ms ease;
-    }
-    .nav-inline a:hover{ background:var(--brand-3); }
-    .nav-inline a.active{ background:var(--brand-3); } /* highlight current page */
+        .nav-row {
+            display: flex;
+            align-items: center;
+            position: relative;
+            min-height: var(--nav-h);
+            padding: 0 var(--space-3);
+            gap: var(--nav-gap);
+        }
 
-    .nav-row.is-collapsed .nav-inline{ display:none; }
+        /* Brand styled like a peer menu item */
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 800;
+            line-height: 1;
+            font-size: var(--fs-brand);
+            border-radius: 8px;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            white-space: nowrap;
+            transition: background-color 160ms ease;
+            flex: 0 0 auto;
+        }
 
-    /* Menu button appears only when collapsed (width-aware JS) */
-    .menu-button{
-      appearance:none; background:transparent; border:0;
-      margin-left:auto; padding:10px; cursor:pointer; border-radius:8px;
-      display:none; align-items:center; justify-content:center; flex:0 0 auto;
-    }
-    .menu-button:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
-    .menu-button svg{ width:28px; height:28px; display:block; fill:#fff; }
-    .nav-row.is-collapsed .menu-button{ display:inline-flex; }
+        .brand-link:hover {
+            background: var(--brand-3);
+        }
 
-    /* Slide-out panel (brand intentionally omitted) */
-    .menu-sheet{
-      position:fixed; inset:0; z-index:1100;
-      display:none; background:rgba(0,0,0,.45);
-    }
-    .menu-sheet[aria-hidden="false"]{ display:block; }
-    .menu-panel{
-      position:absolute; top:0; right:0; width:min(340px,86vw); height:100%;
-      background:var(--card); color:var(--fg);
-      box-shadow:-6px 0 18px rgba(0,0,0,.25);
-      transform:translateX(100%); transition:transform 220ms ease;
-      display:flex; flex-direction:column; padding:calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
-    }
-    .menu-sheet[aria-hidden="false"] .menu-panel{ transform:translateX(0); }
-    .menu-header{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; }
-    .menu-title{ margin:0; font-size:1.125rem; font-weight:800; }
-    .menu-close{ appearance:none; background:transparent; border:0; cursor:pointer; padding:8px; border-radius:8px; }
-    .menu-close:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
-    .menu-close svg{ width:26px; height:26px; }
-    .menu-list{ list-style:none; margin:0; padding:8px 0 0 0; display:grid; gap:8px; }
-    .menu-list a{
-      display:block; text-decoration:none; color:var(--fg);
-      padding:10px 12px; border-radius:8px; background:#f7fbff; border:1px solid #e3f2fd;
-    }
-    .menu-list a:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
+        .brand-link:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
 
-    @media (prefers-reduced-motion: reduce){ .menu-panel{ transition:none; } }
+        .brand-mark {
+            font-size: 1.2em;
+            line-height: 1;
+        }
 
-    /* ===== Login page content (kept from your current login page) ===== */
-    .shell{ max-width:var(--container-max); margin:36px auto; padding:0 16px; }
-    .card{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; }
-    h1{ margin:0 0 16px; font-size:24px }
-    h2{ margin:20px 0 8px; font-size:18px }
-    label{ display:block; font-weight:600; margin:12px 0 6px }
-    input[type="email"],input[type="password"]{ width:100%; padding:12px 14px; border:1px solid #e3e8ef; border-radius:10px; }
-    button{ appearance:none; border:0; background:var(--brand); color:#fff; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer; }
-    button.secondary{ background:#eef4ff; color:#1f2d3d }
-    button.danger{ background:#e11d48 }
-    button[disabled]{ opacity:.6; cursor:not-allowed }
-    .row{ display:flex; gap:12px; flex-wrap:wrap }
-    .muted{ color:var(--muted) }
-    .stack{ display:grid; gap:12px }
-    .divider{ height:1px; background:#eef2f7; margin:16px 0 }
-    .danger-box{ border:1px solid #ffe1e5; background:#fff5f7; border-radius:10px; padding:12px }
-    .status{ white-space:pre-line; background:#0b1020; color:#e6f0ff; border-radius:10px; padding:12px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px }
-  
+        .brand-text {
+            letter-spacing: .2px;
+        }
+
+        /* Centered inline items (hidden when collapsed) */
+        .nav-inline {
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--nav-gap);
+            white-space: nowrap;
+            overflow: hidden;
+            flex: 0 1 auto;
+        }
+
+        .nav-inline li {
+            display: inline-flex;
+        }
+
+        .nav-inline a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            border-radius: 8px;
+            transition: background-color 160ms ease;
+        }
+
+        .nav-inline a:hover {
+            background: var(--brand-3);
+        }
+
+        .nav-inline a.active {
+            background: var(--brand-3);
+        }
+
+        /* highlight current page */
+
+        .nav-row.is-collapsed .nav-inline {
+            display: none;
+        }
+
+        /* Menu button appears only when collapsed (width-aware JS) */
+        .menu-button {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            margin-left: auto;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            fill: #fff;
+        }
+
+        .nav-row.is-collapsed .menu-button {
+            display: inline-flex;
+        }
+
+        /* Slide-out panel (brand intentionally omitted) */
+        .menu-sheet {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            display: none;
+            background: rgba(0, 0, 0, .45);
+        }
+
+        .menu-sheet[aria-hidden="false"] {
+            display: block;
+        }
+
+        .menu-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: min(340px, 86vw);
+            height: 100%;
+            background: var(--card);
+            color: var(--fg);
+            box-shadow: -6px 0 18px rgba(0, 0, 0, .25);
+            transform: translateX(100%);
+            transition: transform 220ms ease;
+            display: flex;
+            flex-direction: column;
+            padding: calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
+        }
+
+        .menu-sheet[aria-hidden="false"] .menu-panel {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .menu-title {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .menu-close {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .menu-close:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        .menu-close svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 8px 0 0 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .menu-list a {
+            display: block;
+            text-decoration: none;
+            color: var(--fg);
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #f7fbff;
+            border: 1px solid #e3f2fd;
+        }
+
+        .menu-list a:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .menu-panel {
+                transition: none;
+            }
+        }
+
+        /* ===== Login page content (kept from your current login page) ===== */
+        .shell {
+            max-width: var(--container-max);
+            margin: 36px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 24px
+        }
+
+        h2 {
+            margin: 20px 0 8px;
+            font-size: 18px
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 12px 0 6px
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e3e8ef;
+            border-radius: 10px;
+        }
+
+        button {
+            appearance: none;
+            border: 0;
+            background: var(--brand);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #eef4ff;
+            color: #1f2d3d
+        }
+
+        button.danger {
+            background: #e11d48
+        }
+
+        button[disabled] {
+            opacity: .6;
+            cursor: not-allowed
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .stack {
+            display: grid;
+            gap: 12px
+        }
+
+        .divider {
+            height: 1px;
+            background: #eef2f7;
+            margin: 16px 0
+        }
+
+        .danger-box {
+            border: 1px solid #ffe1e5;
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px
+        }
+
+        .status {
+            white-space: pre-line;
+            background: #0b1020;
+            color: #e6f0ff;
+            border-radius: 10px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 13px
+        }
 
         /* ===== Page content ===== */
         .container {
@@ -228,51 +473,42 @@
         <p>Sign up today and become part of the PawPrints community!</p>
     </main>
 
+   <!-- ===== Shared header JS (width-aware collapse + slide-out) ===== -->
     <script>
-        // ===== Dynamic overflow-aware nav collapse =====
         (function () {
             var row = document.getElementById('nav-row');
             var inline = document.getElementById('nav-inline');
             var brand = document.querySelector('.brand-link');
             var menuBtn = document.getElementById('menu-button');
 
-            // Ensure a sensible minimum tappable width for the menu button
             var MIN_MENU_BTN = 48; // px
-            var SAFETY = 8;        // px, to flip a tad before true overflow
+            var SAFETY = 8;        // px
 
             function measureAndToggle() {
-                // Temporarily ensure inline is measurable
                 var prevDisplay = inline.style.display;
                 inline.style.display = 'flex';
 
                 var rowW = row.clientWidth;
                 var brandW = brand ? brand.offsetWidth : 0;
-
-                // If the button is currently hidden, assume its minimal width for the check
                 var btnW = (menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
-
-                // Full width needed to show brand + inline items + button (even if button is hidden we reserve it)
                 var needW = brandW + inline.scrollWidth + btnW + SAFETY;
 
                 var collapse = needW > rowW;
 
-                // Restore display and set collapsed state
                 inline.style.display = prevDisplay;
                 row.classList.toggle('is-collapsed', collapse);
             }
 
-            // Recalculate on load, resize, orientation, font reflow, and content changes
             window.addEventListener('load', measureAndToggle);
             window.addEventListener('resize', measureAndToggle);
             window.addEventListener('orientationchange', measureAndToggle);
 
-            // React to layout-affecting changes via ResizeObserver
             var ro = new ResizeObserver(measureAndToggle);
             ro.observe(row);
             ro.observe(inline);
             if (brand) ro.observe(brand);
 
-            // ===== Slide-in panel behavior with accessible focus management =====
+            // Slide-in panel behavior with accessible focus management
             var sheet = document.getElementById('menu-sheet');
             var panel = sheet.querySelector('.menu-panel');
             var closeBtn = document.getElementById('menu-close');

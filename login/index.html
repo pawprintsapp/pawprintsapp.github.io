@@ -1,421 +1,678 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <!-- iPhone-friendly viewport + safe area -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>PawPrints | Account</title>
-  <style>
-    /* ===== Base / Reset ===== */
-    html { -webkit-text-size-adjust: 100%; box-sizing: border-box; }
-    *, *::before, *::after { box-sizing: inherit; }
+    <meta charset="UTF-8" />
+    <!-- iPhone-friendly viewport + safe area -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>PawPrints | Account</title>
+    <style>
+        /* ===== Base / Reset ===== */
+        html {
+            -webkit-text-size-adjust: 100%;
+            box-sizing: border-box;
+        }
 
-    :root{
-      /* Brand palette shared with homepage header */
-      --brand:#2196F3; --brand-2:#64b5f6; --brand-3:#1976D2;
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
 
-      /* Page visuals (kept from your login page) */
-      --bg:#f6fbff; --card:#fff; --fg:#0a0a0a; --muted:#5b6b7b;
+        :root {
+            /* Brand palette shared with homepage header */
+            --brand: #2196F3;
+            --brand-2: #64b5f6;
+            --brand-3: #1976D2;
 
-      /* Header/Nav sizing & spacing that scales with screen width */
-      --fs-body:clamp(15px,1.5vw,17px);
-      --fs-h1:clamp(22px,4.2vw,34px);
-      --fs-hdr:clamp(18px,3.6vw,28px);
-      --fs-brand:clamp(18px,2.4vw,22px);
+            /* Page visuals (kept from your login page) */
+            --bg: #f6fbff;
+            --card: #fff;
+            --fg: #0a0a0a;
+            --muted: #5b6b7b;
 
-      --nav-h:clamp(56px,7vw,80px);      /* nav bar height */
-      --nav-gap:clamp(10px,2.2vw,26px);  /* gap grows on wide screens */
-      --nav-pad-x:clamp(10px,1.6vw,18px);
-      --nav-pad-y:clamp(8px,0.9vw,12px);
+            /* Header/Nav sizing & spacing that scales with screen width */
+            --fs-body: clamp(15px, 1.5vw, 17px);
+            --fs-h1: clamp(22px, 4.2vw, 34px);
+            --fs-hdr: clamp(18px, 3.6vw, 28px);
+            --fs-brand: clamp(18px, 2.4vw, 22px);
 
-      --container-max:860px;
-      --radius:12px; --shadow:0 10px 30px rgba(3,27,78,.08);
+            --nav-h: clamp(56px, 7vw, 80px);
+            /* nav bar height */
+            --nav-gap: clamp(10px, 2.2vw, 26px);
+            /* gap grows on wide screens */
+            --nav-pad-x: clamp(10px, 1.6vw, 18px);
+            --nav-pad-y: clamp(8px, 0.9vw, 12px);
 
-      --space-1:8px; --space-2:12px; --space-3:16px; --space-4:20px; --space-5:28px;
-    }
+            --container-max: 860px;
+            --radius: 12px;
+            --shadow: 0 10px 30px rgba(3, 27, 78, .08);
 
-    body{
-      margin:0;
-      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Apple Color Emoji","Segoe UI Emoji";
-      color:var(--fg);
-      background:var(--bg);
-      line-height:1.6;
-    }
+            --space-1: 8px;
+            --space-2: 12px;
+            --space-3: 16px;
+            --space-4: 20px;
+            --space-5: 28px;
+        }
 
-    /* ===== Top banner (exactly like home) ===== */
-    header.site-header{
-      position:sticky; top:0; z-index:1000;
-      background:var(--brand); color:#fff;
-      padding:calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
-      text-align:center; font-size:var(--fs-hdr); font-weight:700;
-    }
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--fg);
+            background: var(--bg);
+            line-height: 1.6;
+        }
 
-    /* ===== Shared Menu Bar (copied from home) ===== */
-    .nav-wrap{ background:var(--brand-2); }
-    .nav-row{
-      display:flex; align-items:center; position:relative;
-      min-height:var(--nav-h);
-      padding:0 var(--space-3);
-      gap:var(--nav-gap);
-    }
+        /* ===== Top banner (exactly like home) ===== */
+        header.site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--brand);
+            color: #fff;
+            padding: calc(env(safe-area-inset-top) + var(--space-3)) var(--space-3) var(--space-3);
+            text-align: center;
+            font-size: var(--fs-hdr);
+            font-weight: 700;
+        }
 
-    /* Brand styled like a peer menu item */
-    .brand-link{
-      display:inline-flex; align-items:center; gap:10px;
-      text-decoration:none; color:#fff; font-weight:800; line-height:1;
-      font-size:var(--fs-brand);
-      border-radius:8px; padding:var(--nav-pad-y) var(--nav-pad-x);
-      white-space:nowrap; transition:background-color 160ms ease;
-      flex:0 0 auto;
-    }
-    .brand-link:hover{ background:var(--brand-3); }
-    .brand-link:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
-    .brand-mark{ font-size:1.2em; line-height:1; }
-    .brand-text{ letter-spacing:.2px; }
+        /* ===== Shared Menu Bar (copied from home) ===== */
+        .nav-wrap {
+            background: var(--brand-2);
+        }
 
-    /* Centered inline items (hidden when collapsed) */
-    .nav-inline{
-      list-style:none; margin:0 auto; padding:0;
-      display:flex; align-items:center; gap:var(--nav-gap);
-      white-space:nowrap; overflow:hidden; flex:0 1 auto;
-    }
-    .nav-inline li{ display:inline-flex; }
-    .nav-inline a{
-      display:inline-block; text-decoration:none; color:#fff; font-weight:700;
-      padding:var(--nav-pad-y) var(--nav-pad-x); border-radius:8px;
-      transition:background-color 160ms ease;
-    }
-    .nav-inline a:hover{ background:var(--brand-3); }
-    .nav-inline a.active{ background:var(--brand-3); } /* highlight current page */
+        .nav-row {
+            display: flex;
+            align-items: center;
+            position: relative;
+            min-height: var(--nav-h);
+            padding: 0 var(--space-3);
+            gap: var(--nav-gap);
+        }
 
-    .nav-row.is-collapsed .nav-inline{ display:none; }
+        /* Brand styled like a peer menu item */
+        .brand-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 800;
+            line-height: 1;
+            font-size: var(--fs-brand);
+            border-radius: 8px;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            white-space: nowrap;
+            transition: background-color 160ms ease;
+            flex: 0 0 auto;
+        }
 
-    /* Menu button appears only when collapsed (width-aware JS) */
-    .menu-button{
-      appearance:none; background:transparent; border:0;
-      margin-left:auto; padding:10px; cursor:pointer; border-radius:8px;
-      display:none; align-items:center; justify-content:center; flex:0 0 auto;
-    }
-    .menu-button:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
-    .menu-button svg{ width:28px; height:28px; display:block; fill:#fff; }
-    .nav-row.is-collapsed .menu-button{ display:inline-flex; }
+        .brand-link:hover {
+            background: var(--brand-3);
+        }
 
-    /* Slide-out panel (brand intentionally omitted) */
-    .menu-sheet{
-      position:fixed; inset:0; z-index:1100;
-      display:none; background:rgba(0,0,0,.45);
-    }
-    .menu-sheet[aria-hidden="false"]{ display:block; }
-    .menu-panel{
-      position:absolute; top:0; right:0; width:min(340px,86vw); height:100%;
-      background:var(--card); color:var(--fg);
-      box-shadow:-6px 0 18px rgba(0,0,0,.25);
-      transform:translateX(100%); transition:transform 220ms ease;
-      display:flex; flex-direction:column; padding:calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
-    }
-    .menu-sheet[aria-hidden="false"] .menu-panel{ transform:translateX(0); }
-    .menu-header{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:12px; }
-    .menu-title{ margin:0; font-size:1.125rem; font-weight:800; }
-    .menu-close{ appearance:none; background:transparent; border:0; cursor:pointer; padding:8px; border-radius:8px; }
-    .menu-close:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
-    .menu-close svg{ width:26px; height:26px; }
-    .menu-list{ list-style:none; margin:0; padding:8px 0 0 0; display:grid; gap:8px; }
-    .menu-list a{
-      display:block; text-decoration:none; color:var(--fg);
-      padding:10px 12px; border-radius:8px; background:#f7fbff; border:1px solid #e3f2fd;
-    }
-    .menu-list a:focus-visible{ outline:2px solid var(--brand); outline-offset:2px; }
+        .brand-link:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
 
-    @media (prefers-reduced-motion: reduce){ .menu-panel{ transition:none; } }
+        .brand-mark {
+            font-size: 1.2em;
+            line-height: 1;
+        }
 
-    /* ===== Login page content (kept from your current login page) ===== */
-    .shell{ max-width:var(--container-max); margin:36px auto; padding:0 16px; }
-    .card{ background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:20px; }
-    h1{ margin:0 0 16px; font-size:24px }
-    h2{ margin:20px 0 8px; font-size:18px }
-    label{ display:block; font-weight:600; margin:12px 0 6px }
-    input[type="email"],input[type="password"]{ width:100%; padding:12px 14px; border:1px solid #e3e8ef; border-radius:10px; }
-    button{ appearance:none; border:0; background:var(--brand); color:#fff; padding:12px 16px; border-radius:10px; font-weight:700; cursor:pointer; }
-    button.secondary{ background:#eef4ff; color:#1f2d3d }
-    button.danger{ background:#e11d48 }
-    button[disabled]{ opacity:.6; cursor:not-allowed }
-    .row{ display:flex; gap:12px; flex-wrap:wrap }
-    .muted{ color:var(--muted) }
-    .stack{ display:grid; gap:12px }
-    .divider{ height:1px; background:#eef2f7; margin:16px 0 }
-    .danger-box{ border:1px solid #ffe1e5; background:#fff5f7; border-radius:10px; padding:12px }
-    .status{ white-space:pre-line; background:#0b1020; color:#e6f0ff; border-radius:10px; padding:12px; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:13px }
-  </style>
+        .brand-text {
+            letter-spacing: .2px;
+        }
+
+        /* Centered inline items (hidden when collapsed) */
+        .nav-inline {
+            list-style: none;
+            margin: 0 auto;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: var(--nav-gap);
+            white-space: nowrap;
+            overflow: hidden;
+            flex: 0 1 auto;
+        }
+
+        .nav-inline li {
+            display: inline-flex;
+        }
+
+        .nav-inline a {
+            display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 700;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            border-radius: 8px;
+            transition: background-color 160ms ease;
+        }
+
+        .nav-inline a:hover {
+            background: var(--brand-3);
+        }
+
+        .nav-inline a.active {
+            background: var(--brand-3);
+        }
+
+        /* highlight current page */
+
+        .nav-row.is-collapsed .nav-inline {
+            display: none;
+        }
+
+        /* Menu button appears only when collapsed (width-aware JS) */
+        .menu-button {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            margin-left: auto;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            fill: #fff;
+        }
+
+        .nav-row.is-collapsed .menu-button {
+            display: inline-flex;
+        }
+
+        /* Slide-out panel (brand intentionally omitted) */
+        .menu-sheet {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            display: none;
+            background: rgba(0, 0, 0, .45);
+        }
+
+        .menu-sheet[aria-hidden="false"] {
+            display: block;
+        }
+
+        .menu-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: min(340px, 86vw);
+            height: 100%;
+            background: var(--card);
+            color: var(--fg);
+            box-shadow: -6px 0 18px rgba(0, 0, 0, .25);
+            transform: translateX(100%);
+            transition: transform 220ms ease;
+            display: flex;
+            flex-direction: column;
+            padding: calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
+        }
+
+        .menu-sheet[aria-hidden="false"] .menu-panel {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .menu-title {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .menu-close {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .menu-close:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        .menu-close svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 8px 0 0 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .menu-list a {
+            display: block;
+            text-decoration: none;
+            color: var(--fg);
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #f7fbff;
+            border: 1px solid #e3f2fd;
+        }
+
+        .menu-list a:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .menu-panel {
+                transition: none;
+            }
+        }
+
+        /* ===== Login page content (kept from your current login page) ===== */
+        .shell {
+            max-width: var(--container-max);
+            margin: 36px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 24px
+        }
+
+        h2 {
+            margin: 20px 0 8px;
+            font-size: 18px
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 12px 0 6px
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e3e8ef;
+            border-radius: 10px;
+        }
+
+        button {
+            appearance: none;
+            border: 0;
+            background: var(--brand);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #eef4ff;
+            color: #1f2d3d
+        }
+
+        button.danger {
+            background: #e11d48
+        }
+
+        button[disabled] {
+            opacity: .6;
+            cursor: not-allowed
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .stack {
+            display: grid;
+            gap: 12px
+        }
+
+        .divider {
+            height: 1px;
+            background: #eef2f7;
+            margin: 16px 0
+        }
+
+        .danger-box {
+            border: 1px solid #ffe1e5;
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px
+        }
+
+        .status {
+            white-space: pre-line;
+            background: #0b1020;
+            color: #e6f0ff;
+            border-radius: 10px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 13px
+        }
+    </style>
 </head>
 
 <body>
-  <!-- Same banner text as home page -->
-  <header class="site-header">A Social Network for Pet Lovers</header>
+    <!-- Same banner text as home page -->
+    <header class="site-header">A Social Network for Pet Lovers</header>
 
-  <!-- Shared header/nav copied from home page -->
-  <div class="nav-wrap">
-    <nav class="nav-row" id="nav-row" aria-label="Primary">
-      <!-- Brand (looks like another item) -->
-      <a class="brand-link" href="/" aria-label="PawPrints Home">
-        <span class="brand-mark" aria-hidden="true">🐾</span>
-        <span class="brand-text">PawPrints</span>
-      </a>
+    <!-- Shared header/nav copied from home page -->
+    <div class="nav-wrap">
+        <nav class="nav-row" id="nav-row" aria-label="Primary">
+            <!-- Brand (looks like another item) -->
+            <a class="brand-link" href="/" aria-label="PawPrints Home">
+                <span class="brand-mark" aria-hidden="true">🐾</span>
+                <span class="brand-text">PawPrints</span>
+            </a>
 
-      <!-- Inline items (centered, single row). Brand is NOT duplicated. -->
-      <ul class="nav-inline" id="nav-inline">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/support">Support</a></li>
-        <li><a href="/terms">Terms &amp; Conditions</a></li>
-        <li><a href="/privacy">Privacy Policy</a></li>
-        <li><a href="/faq">FAQ</a></li>
-        <li><a href="/login" class="active">Login</a></li>
-      </ul>
+            <!-- Inline items (centered, single row). Brand is NOT duplicated. -->
+            <ul class="nav-inline" id="nav-inline">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/login" class="active">Login</a></li>
+            </ul>
 
-      <!-- Menu button appears only when collapsed (width-aware JS) -->
-      <button class="menu-button" id="menu-button" aria-haspopup="dialog" aria-controls="menu-sheet" aria-expanded="false" aria-label="Open menu">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-      </button>
-    </nav>
-  </div>
-
-  <!-- Slide-in panel for small screens (brand intentionally omitted) -->
-  <div class="menu-sheet" id="menu-sheet" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="menu-title">
-    <div class="menu-panel" role="document">
-      <div class="menu-header">
-        <h2 class="menu-title" id="menu-title">All Menu Items</h2>
-        <button class="menu-close" id="menu-close" aria-label="Close menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.3 5.71 12 12l-6.3-6.29-1.41 1.42L10.59 13.4l-6.3 6.29 1.42 1.41L12 14.83l6.29 6.27 1.41-1.41-6.28-6.29 6.28-6.29z"/></svg>
-        </button>
-      </div>
-      <ul class="menu-list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/support">Support</a></li>
-        <li><a href="/terms">Terms &amp; Conditions</a></li>
-        <li><a href="/privacy">Privacy Policy</a></li>
-        <li><a href="/faq">FAQ</a></li>
-        <li><a href="/login">Login</a></li>
-      </ul>
+            <!-- Menu button appears only when collapsed (width-aware JS) -->
+            <button class="menu-button" id="menu-button" aria-haspopup="dialog" aria-controls="menu-sheet"
+                aria-expanded="false" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+                </svg>
+            </button>
+        </nav>
     </div>
-  </div>
 
-  <!-- ===== Login page content (unchanged functionality) ===== -->
-  <div class="shell stack">
-    <div class="card stack" id="authCard">
-      <h1>Sign in</h1>
-
-      <div class="row">
-        <button id="googleBtn" class="secondary" type="button">Continue with Google</button>
-        <button id="facebookBtn" class="secondary" type="button">Continue with Facebook</button>
-        <button id="appleBtn" class="secondary" type="button">Continue with Apple</button>
-      </div>
-
-      <div class="divider"></div>
-
-      <form id="emailForm" class="stack">
-        <label for="email">Email</label>
-        <input id="email" type="email" autocomplete="email" required />
-        <label for="password">Password</label>
-        <input id="password" type="password" autocomplete="current-password" required />
-
-        <div class="row">
-          <button id="emailSignInBtn" type="submit">Sign in</button>
-          <button id="signOutBtn" class="secondary" type="button" disabled>Sign out</button>
+    <!-- Slide-in panel for small screens (brand intentionally omitted) -->
+    <div class="menu-sheet" id="menu-sheet" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="menu-title">
+        <div class="menu-panel" role="document">
+            <div class="menu-header">
+                <h2 class="menu-title" id="menu-title">All Menu Items</h2>
+                <button class="menu-close" id="menu-close" aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M18.3 5.71 12 12l-6.3-6.29-1.41 1.42L10.59 13.4l-6.3 6.29 1.42 1.41L12 14.83l6.29 6.27 1.41-1.41-6.28-6.29 6.28-6.29z" />
+                    </svg>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
         </div>
-        <p class="muted">No account? Create one in the PawPrints app, then return here.</p>
-      </form>
     </div>
 
-    <div class="card stack" id="meCard" hidden>
-      <h2>Your session</h2>
-      <div class="row" style="align-items:center; justify-content:space-between;">
-        <div><strong>Status:</strong> <span id="authStatus">Signed out</span></div>
-        <div><strong>UID:</strong> <span id="uid">–</span></div>
-      </div>
-      <div class="status" id="log" aria-live="polite"></div>
+    <!-- ===== Login page content (unchanged functionality) ===== -->
+    <div class="shell stack">
+        <div class="card stack" id="authCard">
+            <h1>Sign in</h1>
+
+            <div class="row">
+                <button id="googleBtn" class="secondary" type="button">Continue with Google</button>
+                <button id="facebookBtn" class="secondary" type="button">Continue with Facebook</button>
+                <button id="appleBtn" class="secondary" type="button">Continue with Apple</button>
+            </div>
+
+            <div class="divider"></div>
+
+            <form id="emailForm" class="stack">
+                <label for="email">Email</label>
+                <input id="email" type="email" autocomplete="email" required />
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="current-password" required />
+
+                <div class="row">
+                    <button id="emailSignInBtn" type="submit">Sign in</button>
+                    <button id="signOutBtn" class="secondary" type="button" disabled>Sign out</button>
+                </div>
+                <p class="muted">No account? Create one in the PawPrints app, then return here.</p>
+            </form>
+        </div>
+
+        <div class="card stack" id="meCard" hidden>
+            <h2>Your session</h2>
+            <div class="row" style="align-items:center; justify-content:space-between;">
+                <div><strong>Status:</strong> <span id="authStatus">Signed out</span></div>
+                <div><strong>UID:</strong> <span id="uid">–</span></div>
+            </div>
+            <div class="status" id="log" aria-live="polite"></div>
+        </div>
+
+        <div class="card stack" id="dangerCard" hidden>
+            <h2>Delete account &amp; data</h2>
+            <div class="danger-box">
+                <p><strong>Warning:</strong> This action permanently deletes your PawPrints account and all associated
+                    data (auth, profile, uploads, etc.). This cannot be undone.</p>
+            </div>
+
+            <label><input type="checkbox" id="confirmChk" /> I understand this is permanent.</label>
+
+            <div class="row">
+                <button id="deleteBtn" class="danger" type="button" disabled>Delete my account &amp; data</button>
+                <button id="reauthBtn" class="secondary" type="button" disabled>Re-verify identity</button>
+            </div>
+            <p class="muted">If asked, please re-enter your password or complete provider sign-in again so we can verify
+                it’s really you.</p>
+        </div>
     </div>
 
-    <div class="card stack" id="dangerCard" hidden>
-      <h2>Delete account &amp; data</h2>
-      <div class="danger-box">
-        <p><strong>Warning:</strong> This action permanently deletes your PawPrints account and all associated data (auth, profile, uploads, etc.). This cannot be undone.</p>
-      </div>
+    <!-- ===== Shared header JS (width-aware collapse + slide-out) ===== -->
+    <script>
+        (function () {
+            var row = document.getElementById('nav-row');
+            var inline = document.getElementById('nav-inline');
+            var brand = document.querySelector('.brand-link');
+            var menuBtn = document.getElementById('menu-button');
 
-      <label><input type="checkbox" id="confirmChk" /> I understand this is permanent.</label>
+            var MIN_MENU_BTN = 48; // px
+            var SAFETY = 8;        // px
 
-      <div class="row">
-        <button id="deleteBtn" class="danger" type="button" disabled>Delete my account &amp; data</button>
-        <button id="reauthBtn" class="secondary" type="button" disabled>Re-verify identity</button>
-      </div>
-      <p class="muted">If asked, please re-enter your password or complete provider sign-in again so we can verify it’s really you.</p>
-    </div>
-  </div>
+            function measureAndToggle() {
+                var prevDisplay = inline.style.display;
+                inline.style.display = 'flex';
 
-  <!-- ===== Shared header JS (width-aware collapse + slide-out) ===== -->
-  <script>
-    (function () {
-      var row = document.getElementById('nav-row');
-      var inline = document.getElementById('nav-inline');
-      var brand = document.querySelector('.brand-link');
-      var menuBtn = document.getElementById('menu-button');
+                var rowW = row.clientWidth;
+                var brandW = brand ? brand.offsetWidth : 0;
+                var btnW = (menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
+                var needW = brandW + inline.scrollWidth + btnW + SAFETY;
 
-      var MIN_MENU_BTN = 48; // px
-      var SAFETY = 8;        // px
+                var collapse = needW > rowW;
 
-      function measureAndToggle() {
-        var prevDisplay = inline.style.display;
-        inline.style.display = 'flex';
+                inline.style.display = prevDisplay;
+                row.classList.toggle('is-collapsed', collapse);
+            }
 
-        var rowW = row.clientWidth;
-        var brandW = brand ? brand.offsetWidth : 0;
-        var btnW = (menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
-        var needW = brandW + inline.scrollWidth + btnW + SAFETY;
+            window.addEventListener('load', measureAndToggle);
+            window.addEventListener('resize', measureAndToggle);
+            window.addEventListener('orientationchange', measureAndToggle);
 
-        var collapse = needW > rowW;
+            var ro = new ResizeObserver(measureAndToggle);
+            ro.observe(row);
+            ro.observe(inline);
+            if (brand) ro.observe(brand);
 
-        inline.style.display = prevDisplay;
-        row.classList.toggle('is-collapsed', collapse);
-      }
+            // Slide-in panel behavior with accessible focus management
+            var sheet = document.getElementById('menu-sheet');
+            var panel = sheet.querySelector('.menu-panel');
+            var closeBtn = document.getElementById('menu-close');
+            var firstLink = sheet.querySelector('.menu-list a');
 
-      window.addEventListener('load', measureAndToggle);
-      window.addEventListener('resize', measureAndToggle);
-      window.addEventListener('orientationchange', measureAndToggle);
+            function openMenu() {
+                sheet.setAttribute('aria-hidden', 'false');
+                menuBtn.setAttribute('aria-expanded', 'true');
+                setTimeout(function () { (firstLink || closeBtn).focus(); }, 0);
+                document.body.style.overflow = 'hidden';
+            }
+            function closeMenu() {
+                sheet.setAttribute('aria-hidden', 'true');
+                menuBtn.setAttribute('aria-expanded', 'false');
+                menuBtn.focus();
+                document.body.style.overflow = '';
+            }
 
-      var ro = new ResizeObserver(measureAndToggle);
-      ro.observe(row);
-      ro.observe(inline);
-      if (brand) ro.observe(brand);
+            if (menuBtn && closeBtn && sheet && panel) {
+                menuBtn.addEventListener('click', openMenu);
+                closeBtn.addEventListener('click', closeMenu);
+                sheet.addEventListener('click', function (e) { if (!panel.contains(e.target)) closeMenu(); });
+                window.addEventListener('keydown', function (e) {
+                    if (sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') { e.preventDefault(); closeMenu(); }
+                });
+            }
+        })();
+    </script>
 
-      // Slide-in panel behavior with accessible focus management
-      var sheet = document.getElementById('menu-sheet');
-      var panel = sheet.querySelector('.menu-panel');
-      var closeBtn = document.getElementById('menu-close');
-      var firstLink = sheet.querySelector('.menu-list a');
+    <!-- ===== Firebase Web SDK (unchanged from your login page) ===== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+        import {
+            getAuth, onAuthStateChanged,
+            GoogleAuthProvider, FacebookAuthProvider, OAuthProvider,
+            signInWithPopup, signInWithEmailAndPassword, signOut,
+            reauthenticateWithPopup, reauthenticateWithCredential, EmailAuthProvider
+        } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
 
-      function openMenu() {
-        sheet.setAttribute('aria-hidden', 'false');
-        menuBtn.setAttribute('aria-expanded', 'true');
-        setTimeout(function () { (firstLink || closeBtn).focus(); }, 0);
-        document.body.style.overflow = 'hidden';
-      }
-      function closeMenu() {
-        sheet.setAttribute('aria-hidden', 'true');
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.focus();
-        document.body.style.overflow = '';
-      }
+        const firebaseConfig = {
+            apiKey: "AIzaSyD3kJ7acMyRf20czeuchumKmZGI903HKXk",
+            authDomain: "pawprints-58331.firebaseapp.com",
+            databaseURL: "https://pawprints-58331-default-rtdb.firebaseio.com",
+            projectId: "pawprints-58331",
+            storageBucket: "pawprints-58331.firebasestorage.app",
+            messagingSenderId: "866043739451",
+            appId: "1:866043739451:web:abd46943ed6862b77acb1e",
+            measurementId: "G-919JP2VEYE"
+        };
 
-      if (menuBtn && closeBtn && sheet && panel) {
-        menuBtn.addEventListener('click', openMenu);
-        closeBtn.addEventListener('click', closeMenu);
-        sheet.addEventListener('click', function (e) { if (!panel.contains(e.target)) closeMenu(); });
-        window.addEventListener('keydown', function (e) {
-          if (sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') { e.preventDefault(); closeMenu(); }
-        });
-      }
-    })();
-  </script>
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const functions = getFunctions(app, "us-central1");
+        const callDelete = httpsCallable(functions, "deleteAccountAndData");
 
-  <!-- ===== Firebase Web SDK (unchanged from your login page) ===== -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
-    import {
-      getAuth, onAuthStateChanged,
-      GoogleAuthProvider, FacebookAuthProvider, OAuthProvider,
-      signInWithPopup, signInWithEmailAndPassword, signOut,
-      reauthenticateWithPopup, reauthenticateWithCredential, EmailAuthProvider
-    } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
-    import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-functions.js";
+        const $ = (s) => document.querySelector(s);
+        const logEl = $("#log");
+        const log = (m) => { const t = new Date().toLocaleTimeString(); logEl.textContent = `[${t}] ${m}\n` + logEl.textContent; };
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyD3kJ7acMyRf20czeuchumKmZGI903HKXk",
-      authDomain: "pawprints-58331.firebaseapp.com",
-      databaseURL: "https://pawprints-58331-default-rtdb.firebaseio.com",
-      projectId: "pawprints-58331",
-      storageBucket: "pawprints-58331.firebasestorage.app",
-      messagingSenderId: "866043739451",
-      appId: "1:866043739451:web:abd46943ed6862b77acb1e",
-      measurementId: "G-919JP2VEYE"
-    };
+        const emailForm = $("#emailForm"), emailInp = $("#email"), passInp = $("#password"), emailBtn = $("#emailSignInBtn");
+        const googleBtn = $("#googleBtn"), facebookBtn = $("#facebookBtn"), appleBtn = $("#appleBtn");
+        const signOutBtn = $("#signOutBtn");
+        const confirmChk = $("#confirmChk"), deleteBtn = $("#deleteBtn"), reauthBtn = $("#reauthBtn");
+        const authStatus = $("#authStatus"), uidEl = $("#uid");
+        const meCard = $("#meCard"), dangerCard = $("#dangerCard");
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const functions = getFunctions(app, "us-central1");
-    const callDelete = httpsCallable(functions, "deleteAccountAndData");
+        // Sign-in
+        googleBtn.onclick = async () => { googleBtn.disabled = true; try { await signInWithPopup(auth, new GoogleAuthProvider()); } catch (e) { log(`Google sign-in error: ${e.code || ""} ${e.message || e}`); alert("Google sign-in failed."); } finally { googleBtn.disabled = false; } };
+        facebookBtn.onclick = async () => { facebookBtn.disabled = true; try { await signInWithPopup(auth, new FacebookAuthProvider()); } catch (e) { log(`Facebook sign-in error: ${e.code || ""} ${e.message || e}`); alert("Facebook sign-in failed."); } finally { facebookBtn.disabled = false; } };
+        appleBtn.onclick = async () => { appleBtn.disabled = true; try { await signInWithPopup(auth, new OAuthProvider('apple.com')); } catch (e) { log(`Apple sign-in error: ${e.code || ""} ${e.message || e}`); alert("Apple sign-in failed."); } finally { appleBtn.disabled = false; } };
+        emailForm.onsubmit = async (e) => { e.preventDefault(); emailBtn.disabled = true; try { await signInWithEmailAndPassword(auth, emailInp.value, passInp.value); } catch (e) { log(`Email sign-in error: ${e.code || ""} ${e.message || e}`); alert("Email sign-in failed."); } finally { emailBtn.disabled = false; } };
+        signOutBtn.onclick = async () => { signOutBtn.disabled = true; try { await signOut(auth); } catch (e) { log(`Sign out error: ${e.message || e}`); } finally { signOutBtn.disabled = false; } };
 
-    const $ = (s)=>document.querySelector(s);
-    const logEl = $("#log");
-    const log = (m)=>{ const t=new Date().toLocaleTimeString(); logEl.textContent = `[${t}] ${m}\n` + logEl.textContent; };
-
-    const emailForm = $("#emailForm"), emailInp=$("#email"), passInp=$("#password"), emailBtn=$("#emailSignInBtn");
-    const googleBtn=$("#googleBtn"), facebookBtn=$("#facebookBtn"), appleBtn=$("#appleBtn");
-    const signOutBtn=$("#signOutBtn");
-    const confirmChk=$("#confirmChk"), deleteBtn=$("#deleteBtn"), reauthBtn=$("#reauthBtn");
-    const authStatus=$("#authStatus"), uidEl=$("#uid");
-    const meCard=$("#meCard"), dangerCard=$("#dangerCard");
-
-    // Sign-in
-    googleBtn.onclick = async () => { googleBtn.disabled=true; try { await signInWithPopup(auth, new GoogleAuthProvider()); } catch(e){ log(`Google sign-in error: ${e.code||""} ${e.message||e}`); alert("Google sign-in failed."); } finally { googleBtn.disabled=false; } };
-    facebookBtn.onclick = async () => { facebookBtn.disabled=true; try { await signInWithPopup(auth, new FacebookAuthProvider()); } catch(e){ log(`Facebook sign-in error: ${e.code||""} ${e.message||e}`); alert("Facebook sign-in failed."); } finally { facebookBtn.disabled=false; } };
-    appleBtn.onclick = async () => { appleBtn.disabled=true; try { await signInWithPopup(auth, new OAuthProvider('apple.com')); } catch(e){ log(`Apple sign-in error: ${e.code||""} ${e.message||e}`); alert("Apple sign-in failed."); } finally { appleBtn.disabled=false; } };
-    emailForm.onsubmit = async (e)=>{ e.preventDefault(); emailBtn.disabled=true; try{ await signInWithEmailAndPassword(auth, emailInp.value, passInp.value); } catch(e){ log(`Email sign-in error: ${e.code||""} ${e.message||e}`); alert("Email sign-in failed."); } finally { emailBtn.disabled=false; } };
-    signOutBtn.onclick = async ()=>{ signOutBtn.disabled=true; try{ await signOut(auth); } catch(e){ log(`Sign out error: ${e.message||e}`); } finally { signOutBtn.disabled=false; } };
-
-    // Re-auth
-    async function ensureRecentLogin(user){
-      try{
-        const pid = user.providerData[0]?.providerId || "password";
-        if (pid === "password") {
-          const pwd = prompt("For your security, please re-enter your password:");
-          if (!pwd) throw new Error("Re-auth cancelled.");
-          const cred = EmailAuthProvider.credential(user.email, pwd);
-          await reauthenticateWithCredential(user, cred);
-        } else {
-          let p;
-          if (pid==="google.com") p=new GoogleAuthProvider();
-          else if (pid==="facebook.com") p=new FacebookAuthProvider();
-          else if (pid==="apple.com") p=new OAuthProvider("apple.com");
-          else p=new GoogleAuthProvider();
-          await reauthenticateWithPopup(user, p);
+        // Re-auth
+        async function ensureRecentLogin(user) {
+            try {
+                const pid = user.providerData[0]?.providerId || "password";
+                if (pid === "password") {
+                    const pwd = prompt("For your security, please re-enter your password:");
+                    if (!pwd) throw new Error("Re-auth cancelled.");
+                    const cred = EmailAuthProvider.credential(user.email, pwd);
+                    await reauthenticateWithCredential(user, cred);
+                } else {
+                    let p;
+                    if (pid === "google.com") p = new GoogleAuthProvider();
+                    else if (pid === "facebook.com") p = new FacebookAuthProvider();
+                    else if (pid === "apple.com") p = new OAuthProvider("apple.com");
+                    else p = new GoogleAuthProvider();
+                    await reauthenticateWithPopup(user, p);
+                }
+                return true;
+            } catch (e) { log(`Re-auth failed: ${e.code || ""} ${e.message || e}`); alert("We couldn’t verify your identity. Please try again."); return false; }
         }
-        return true;
-      } catch(e){ log(`Re-auth failed: ${e.code||""} ${e.message||e}`); alert("We couldn’t verify your identity. Please try again."); return false; }
-    }
-    reauthBtn.onclick = async ()=>{ if(!auth.currentUser) return; reauthBtn.disabled=true; const ok=await ensureRecentLogin(auth.currentUser); if(ok) log("Identity verified."); reauthBtn.disabled=false; };
+        reauthBtn.onclick = async () => { if (!auth.currentUser) return; reauthBtn.disabled = true; const ok = await ensureRecentLogin(auth.currentUser); if (ok) log("Identity verified."); reauthBtn.disabled = false; };
 
-    // Delete via Cloud Function (Render API → Firebase → Auth)
-    confirmChk.onchange = ()=>{ deleteBtn.disabled = !confirmChk.checked || !auth.currentUser; reauthBtn.disabled = !auth.currentUser; };
-    deleteBtn.onclick = async ()=>{
-      const user = auth.currentUser; if(!user) return;
-      deleteBtn.disabled = true;
-      const ok = await ensureRecentLogin(user); if(!ok){ deleteBtn.disabled=false; return; }
-      try{
-        log("Starting deletion: contacting server…");
-        const res = await callDelete({});
-        const { message, details } = (res && res.data) || {};
-        if (details && Array.isArray(details)) details.forEach((d)=> log(d));
-        log(message || "Server finished.");
-        await signOut(auth);
-        alert("Your account and data were deleted. Goodbye 💙");
-      } catch(e){
-        log(`Delete failed: ${e.code||""} ${e.message||e}`);
-        alert("We could not delete your account. See the log for details.");
-      } finally { deleteBtn.disabled = false; }
-    };
+        // Delete via Cloud Function (Render API → Firebase → Auth)
+        confirmChk.onchange = () => { deleteBtn.disabled = !confirmChk.checked || !auth.currentUser; reauthBtn.disabled = !auth.currentUser; };
+        deleteBtn.onclick = async () => {
+            const user = auth.currentUser; if (!user) return;
+            deleteBtn.disabled = true;
+            const ok = await ensureRecentLogin(user); if (!ok) { deleteBtn.disabled = false; return; }
+            try {
+                log("Starting deletion: contacting server…");
+                const res = await callDelete({});
+                const { message, details } = (res && res.data) || {};
+                if (details && Array.isArray(details)) details.forEach((d) => log(d));
+                log(message || "Server finished.");
+                await signOut(auth);
+                alert("Your account and data were deleted. Goodbye 💙");
+            } catch (e) {
+                log(`Delete failed: ${e.code || ""} ${e.message || e}`);
+                alert("We could not delete your account. See the log for details.");
+            } finally { deleteBtn.disabled = false; }
+        };
 
-    // Wiring
-    onAuthStateChanged(auth, (user)=>{
-      const signedIn = !!user;
-      uidEl.textContent = signedIn ? user.uid : "–";
-      authStatus.textContent = signedIn ? "Signed in" : "Signed out";
-      signOutBtn.disabled = !signedIn;
-      meCard.hidden = !signedIn;
-      dangerCard.hidden = !signedIn;
-      deleteBtn.disabled = !signedIn || !confirmChk.checked;
-      reauthBtn.disabled = !signedIn;
-      log(signedIn ? `Welcome, ${user.email || user.displayName || user.uid}` : "You are signed out.");
-    });
-  </script>
+        // Wiring
+        onAuthStateChanged(auth, (user) => {
+            const signedIn = !!user;
+            uidEl.textContent = signedIn ? user.uid : "–";
+            authStatus.textContent = signedIn ? "Signed in" : "Signed out";
+            signOutBtn.disabled = !signedIn;
+            meCard.hidden = !signedIn;
+            dangerCard.hidden = !signedIn;
+            deleteBtn.disabled = !signedIn || !confirmChk.checked;
+            reauthBtn.disabled = !signedIn;
+            log(signedIn ? `Welcome, ${user.email || user.displayName || user.uid}` : "You are signed out.");
+        });
+    </script>
 </body>
+
 </html>

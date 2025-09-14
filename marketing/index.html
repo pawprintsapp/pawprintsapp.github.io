@@ -5,44 +5,64 @@
   <!-- Important for iPhone: viewport-fit=cover + correct scaling -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Marketing | PawPrints</title>
-  <style>
-    html {
+   <style>
+        /* ===== Base / Reset ===== */
+        html {
             -webkit-text-size-adjust: 100%;
             box-sizing: border-box;
         }
+
         *,
         *::before,
         *::after {
             box-sizing: inherit;
         }
+
         :root {
-            --brand: #2196f3;
+            /* Brand palette shared with homepage header */
+            --brand: #2196F3;
             --brand-2: #64b5f6;
-            --brand-3: #1976d2;
-            --bg: #e3f2fd;
-            --fg: #0a0a0a;
+            --brand-3: #1976D2;
+
+            /* Page visuals (kept from your login page) */
+            --bg: #f6fbff;
             --card: #fff;
-            --shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --fg: #0a0a0a;
+            --muted: #5b6b7b;
+
+            /* Header/Nav sizing & spacing that scales with screen width */
             --fs-body: clamp(15px, 1.5vw, 17px);
             --fs-h1: clamp(22px, 4.2vw, 34px);
             --fs-hdr: clamp(18px, 3.6vw, 28px);
             --fs-brand: clamp(18px, 2.4vw, 22px);
-            --container-max: 800px;
+
+            --nav-h: clamp(56px, 7vw, 80px);
+            /* nav bar height */
+            --nav-gap: clamp(10px, 2.2vw, 26px);
+            /* gap grows on wide screens */
+            --nav-pad-x: clamp(10px, 1.6vw, 18px);
+            --nav-pad-y: clamp(8px, 0.9vw, 12px);
+
+            --container-max: 860px;
+            --radius: 12px;
+            --shadow: 0 10px 30px rgba(3, 27, 78, .08);
+
             --space-1: 8px;
             --space-2: 12px;
             --space-3: 16px;
             --space-4: 20px;
             --space-5: 28px;
-            --radius: 10px;
         }
+
         body {
             margin: 0;
-            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-                Arial, "Apple Color Emoji", "Segoe UI Emoji";
-            line-height: 1.6;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
             color: var(--fg);
             background: var(--bg);
+            line-height: 1.6;
         }
+
+        /* ===== Top banner (exactly like home) ===== */
         header.site-header {
             position: sticky;
             top: 0;
@@ -54,28 +74,23 @@
             font-size: var(--fs-hdr);
             font-weight: 700;
         }
+
+        /* ===== Shared Menu Bar (copied from home) ===== */
         .nav-wrap {
             background: var(--brand-2);
-            padding: 0;
         }
+
         .nav-row {
             display: flex;
             align-items: center;
-            justify-content: flex-start;
-            gap: 14px;
-            width: 100%;
-            padding: 10px var(--space-3);
-            overflow-x: auto;
-            overflow-y: hidden;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            position: relative;
+            min-height: var(--nav-h);
+            padding: 0 var(--space-3);
+            gap: var(--nav-gap);
         }
-        .nav-row::-webkit-scrollbar {
-            display: none;
-        }
-        /* WebKit hide */
-        .brand {
+
+        /* Brand styled like a peer menu item */
+        .brand-link {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -85,44 +100,299 @@
             line-height: 1;
             font-size: var(--fs-brand);
             border-radius: 8px;
-            padding: 6px 8px;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            white-space: nowrap;
+            transition: background-color 160ms ease;
             flex: 0 0 auto;
         }
-        .brand:focus-visible {
+
+        .brand-link:hover {
+            background: var(--brand-3);
+        }
+
+        .brand-link:focus-visible {
             outline: 2px solid #fff;
             outline-offset: 2px;
         }
+
         .brand-mark {
             font-size: 1.2em;
             line-height: 1;
         }
+
         .brand-text {
-            letter-spacing: 0.2px;
+            letter-spacing: .2px;
         }
-        .nav-links {
+
+        /* Centered inline items (hidden when collapsed) */
+        .nav-inline {
             list-style: none;
-            margin: 0;
+            margin: 0 auto;
             padding: 0;
             display: flex;
             align-items: center;
-            gap: 14px;
-            flex: 0 0 auto;
+            gap: var(--nav-gap);
+            white-space: nowrap;
+            overflow: hidden;
+            flex: 0 1 auto;
         }
-        .nav-links li {
-            flex: 0 0 auto;
+
+        .nav-inline li {
+            display: inline-flex;
         }
-        .nav-links a {
+
+        .nav-inline a {
             display: inline-block;
             text-decoration: none;
             color: #fff;
             font-weight: 700;
-            padding: 10px 12px;
-            border-radius: 6px;
+            padding: var(--nav-pad-y) var(--nav-pad-x);
+            border-radius: 8px;
             transition: background-color 160ms ease;
         }
-        .nav-links a:hover {
+
+        .nav-inline a:hover {
             background: var(--brand-3);
         }
+
+        .nav-inline a.active {
+            background: var(--brand-3);
+        }
+
+        /* highlight current page */
+
+        .nav-row.is-collapsed .nav-inline {
+            display: none;
+        }
+
+        /* Menu button appears only when collapsed (width-aware JS) */
+        .menu-button {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            margin-left: auto;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+        }
+
+        .menu-button:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        .menu-button svg {
+            width: 28px;
+            height: 28px;
+            display: block;
+            fill: #fff;
+        }
+
+        .nav-row.is-collapsed .menu-button {
+            display: inline-flex;
+        }
+
+        /* Slide-out panel (brand intentionally omitted) */
+        .menu-sheet {
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            display: none;
+            background: rgba(0, 0, 0, .45);
+        }
+
+        .menu-sheet[aria-hidden="false"] {
+            display: block;
+        }
+
+        .menu-panel {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: min(340px, 86vw);
+            height: 100%;
+            background: var(--card);
+            color: var(--fg);
+            box-shadow: -6px 0 18px rgba(0, 0, 0, .25);
+            transform: translateX(100%);
+            transition: transform 220ms ease;
+            display: flex;
+            flex-direction: column;
+            padding: calc(env(safe-area-inset-top) + 14px) 16px 16px 16px;
+        }
+
+        .menu-sheet[aria-hidden="false"] .menu-panel {
+            transform: translateX(0);
+        }
+
+        .menu-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .menu-title {
+            margin: 0;
+            font-size: 1.125rem;
+            font-weight: 800;
+        }
+
+        .menu-close {
+            appearance: none;
+            background: transparent;
+            border: 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .menu-close:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        .menu-close svg {
+            width: 26px;
+            height: 26px;
+        }
+
+        .menu-list {
+            list-style: none;
+            margin: 0;
+            padding: 8px 0 0 0;
+            display: grid;
+            gap: 8px;
+        }
+
+        .menu-list a {
+            display: block;
+            text-decoration: none;
+            color: var(--fg);
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: #f7fbff;
+            border: 1px solid #e3f2fd;
+        }
+
+        .menu-list a:focus-visible {
+            outline: 2px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .menu-panel {
+                transition: none;
+            }
+        }
+
+        /* ===== Login page content (kept from your current login page) ===== */
+        .shell {
+            max-width: var(--container-max);
+            margin: 36px auto;
+            padding: 0 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 20px;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 24px
+        }
+
+        h2 {
+            margin: 20px 0 8px;
+            font-size: 18px
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin: 12px 0 6px
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #e3e8ef;
+            border-radius: 10px;
+        }
+
+        button {
+            appearance: none;
+            border: 0;
+            background: var(--brand);
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #eef4ff;
+            color: #1f2d3d
+        }
+
+        button.danger {
+            background: #e11d48
+        }
+
+        button[disabled] {
+            opacity: .6;
+            cursor: not-allowed
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .stack {
+            display: grid;
+            gap: 12px
+        }
+
+        .divider {
+            height: 1px;
+            background: #eef2f7;
+            margin: 16px 0
+        }
+
+        .danger-box {
+            border: 1px solid #ffe1e5;
+            background: #fff5f7;
+            border-radius: 10px;
+            padding: 12px
+        }
+
+        .status {
+            white-space: pre-line;
+            background: #0b1020;
+            color: #e6f0ff;
+            border-radius: 10px;
+            padding: 12px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            font-size: 13px
+        }
+
+        /* ===== Page content ===== */
         .container {
             max-width: var(--container-max);
             margin: var(--space-5) auto;
@@ -132,51 +402,68 @@
             box-shadow: var(--shadow);
             text-align: left;
         }
-        h1 {
-            font-size: var(--fs-h1);
-            line-height: 1.25;
-            margin: 0 0 var(--space-3);
-        }
-        p,
-        li {
-            font-size: var(--fs-body);
-            margin: 0 0 10px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        @media (max-width: 360px) {
-            .nav-links a {
-                padding: 8px 10px;
-            }
-        }
-        .safe-bottom {
-            padding-bottom: env(safe-area-inset-bottom);
-        }
-  </style>
+    </style>
 </head>
+
 <body>
-  <header class="site-header">PawPrints - The Social App for Pet Lovers</header>
+    <header class="site-header">A Social Network for Pet Lovers</header>
 
-  <div class="nav-wrap safe-bottom">
-    <div class="nav-inner">
-      <!-- Hamburger (mobile only) -->
-      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
-      </button>
+    <!-- Menu bar: Brand styled as an item (left). Inline items center. JS collapses before overflow. -->
+    <div class="nav-wrap">
+        <nav class="nav-row" id="nav-row" aria-label="Primary">
+            <!-- Brand (looks like another item) -->
+            <a class="brand-link" href="/" aria-label="PawPrints Home">
+                <span class="brand-mark" aria-hidden="true">🐾</span>
+                <span class="brand-text">PawPrints</span>
+            </a>
 
-      <nav id="primary-nav" class="primary" aria-expanded="false">
-        <ul class="nav-links">
-           <li><a href="/">Home</a></li>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/support">Support</a></li>
-          <li><a href="/terms">Terms &amp; Conditions</a></li>
-          <li><a href="/privacy">Privacy Policy</a></li>
-          <li><a href="/faq">FAQ</a></li>
-        </ul>
-      </nav>
+            <!-- Inline items (centered, single row). BRAND IS NOT DUPLICATED HERE. -->
+            <ul class="nav-inline" id="nav-inline">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/login">Login</a></li>
+
+            </ul>
+
+            <!-- Menu button appears only when collapsed (via JS) -->
+            <button class="menu-button" id="menu-button" aria-haspopup="dialog" aria-controls="menu-sheet"
+                aria-expanded="false" aria-label="Open menu">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+                </svg>
+            </button>
+        </nav>
     </div>
-  </div>
+
+    <!-- Slide-in panel for small screens (brand intentionally omitted) -->
+    <div class="menu-sheet" id="menu-sheet" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="menu-title">
+        <div class="menu-panel" role="document">
+            <div class="menu-header">
+                <h2 class="menu-title" id="menu-title">All Menu Items</h2>
+                <button class="menu-close" id="menu-close" aria-label="Close menu">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M18.3 5.71 12 12l-6.3-6.29-1.41 1.42L10.59 13.4l-6.3 6.29 1.42 1.41L12 14.83l6.29 6.27 1.41-1.41-6.28-6.29 6.28-6.29z" />
+                    </svg>
+                </button>
+            </div>
+            <ul class="menu-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/terms">Terms &amp; Conditions</a></li>
+                <li><a href="/privacy">Privacy Policy</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="/login">Login</a></li>
+
+            </ul>
+        </div>
+    </div>
 
   <main class="container">
     <h1>Why Choose PawPrints?</h1>
