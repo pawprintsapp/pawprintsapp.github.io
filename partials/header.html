@@ -45,7 +45,7 @@
     .pp-brand-mark{ font-size:1.2em; line-height:1; }
     .pp-brand-text{ letter-spacing:.2px; }
 
-    /* Centered inline items (hidden when collapsed) */
+    /* Centered inline items */
     .pp-nav-inline{
       list-style:none; margin:0 auto; padding:0;
       display:flex; align-items:center; gap:var(--pp-nav-gap);
@@ -60,9 +60,10 @@
     .pp-nav-inline a:hover{ background:var(--pp-brand-3); }
     .pp-nav-inline a.pp-active{ background:var(--pp-brand-3); }
 
+    /* Collapsed state hides inline; we never toggle this during measurement */
     .pp-nav-row.pp-collapsed .pp-nav-inline{ display:none; }
 
-    /* Menu button appears only when collapsed (width-aware JS) */
+    /* Menu button appears only when collapsed */
     .pp-menu-button{
       appearance:none; background:transparent; border:0;
       margin-left:auto; padding:10px; cursor:pointer; border-radius:8px;
@@ -101,19 +102,15 @@
     @media (prefers-reduced-motion: reduce){ .pp-menu-panel{ transition:none; } }
   </style>
 
-  <!-- Banner text (same across pages) -->
   <header class="pp-site-header">A Social Network for Pet Lovers</header>
 
-  <!-- Navigation -->
   <div class="pp-nav-wrap">
     <nav class="pp-nav-row" aria-label="Primary">
-      <!-- Brand (looks like another item, never in the drawer) -->
       <a class="pp-brand-link" href="/" aria-label="PawPrints Home">
         <span class="pp-brand-mark" aria-hidden="true">🐾</span>
         <span class="pp-brand-text">PawPrints</span>
       </a>
 
-      <!-- Inline items (centered). Add/remove items here. -->
       <ul class="pp-nav-inline">
         <li><a href="/">Home</a></li>
         <li><a href="/about">About Us</a></li>
@@ -124,14 +121,12 @@
         <li><a href="/login">Login</a></li>
       </ul>
 
-      <!-- Menu button (shown only when collapsed) -->
       <button class="pp-menu-button" aria-haspopup="dialog" aria-controls="pp-menu-sheet" aria-expanded="false" aria-label="Open menu">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
       </button>
     </nav>
   </div>
 
-  <!-- Slide-out panel (same items as inline; omit the brand) -->
   <div class="pp-menu-sheet" id="pp-menu-sheet" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pp-menu-title">
     <div class="pp-menu-panel" role="document">
       <div class="pp-menu-header">
@@ -153,58 +148,62 @@
   </div>
 
   <script>
-    // ===== Header initializer (scoped to this partial instance) =====
     (function(){
-      // Find the nearest scope wrapper even if this script is re-executed
-      var root = document.currentScript ?
-        document.currentScript.closest('.pp-header-scope') :
-        document.querySelector('.pp-header-scope');
+      const root   = document.currentScript ? document.currentScript.closest('.pp-header-scope') : document.querySelector('.pp-header-scope');
       if (!root) return;
 
-      var row      = root.querySelector('.pp-nav-row');
-      var inline   = root.querySelector('.pp-nav-inline');
-      var brand    = root.querySelector('.pp-brand-link');
-      var menuBtn  = root.querySelector('.pp-menu-button');
-      var sheet    = root.querySelector('#pp-menu-sheet');
-      var panel    = root.querySelector('.pp-menu-panel');
-      var closeBtn = root.querySelector('.pp-menu-close');
-      var firstLink= root.querySelector('.pp-menu-list a');
+      const row      = root.querySelector('.pp-nav-row');
+      const inline   = root.querySelector('.pp-nav-inline');
+      const brand    = root.querySelector('.pp-brand-link');
+      const menuBtn  = root.querySelector('.pp-menu-button');
+      const sheet    = root.querySelector('#pp-menu-sheet');
+      const panel    = root.querySelector('.pp-menu-panel');
+      const closeBtn = root.querySelector('.pp-menu-close');
+      const firstLink= root.querySelector('.pp-menu-list a');
 
-      // Highlight active link by current path
+      // 1) Active link highlight
       try{
-        var path = location.pathname.replace(/\/+$/,'') || '/';
-        root.querySelectorAll('.pp-nav-inline a, .pp-menu-list a').forEach(function(a){
-          var ap = a.getAttribute('href').replace(/\/+$/,'') || '/';
+        const path = location.pathname.replace(/\/+$/,'') || '/';
+        root.querySelectorAll('.pp-nav-inline a, .pp-menu-list a').forEach((a)=>{
+          const ap = (a.getAttribute('href') || '').replace(/\/+$/,'') || '/';
           if (ap === path) a.classList.add('pp-active');
         });
       }catch(_){}
 
-      // Width-aware collapse (never clip an item; reserve space for menu button)
-      var MIN_MENU_BTN = 48; // px
-      var SAFETY = 8;        // px
+      // 2) Measure inline width WITHOUT touching the real element (no flicker)
+      function measureInlineWidth(){
+        if (!inline) return 0;
+        const clone = inline.cloneNode(true);
+        clone.style.cssText = 'position:absolute; visibility:hidden; height:auto; width:auto; display:flex; white-space:nowrap; left:-99999px; top:-99999px;';
+        document.body.appendChild(clone);
+        const w = clone.scrollWidth;
+        document.body.removeChild(clone);
+        return w;
+      }
 
-      function measureAndToggle(){
-        if (!row || !inline) return;
-        var prev = inline.style.display;
-        inline.style.display = 'flex';
+      const MIN_MENU_BTN = 48; // px
+      const SAFETY = 8;        // px
 
-        var rowW   = row.clientWidth;
-        var brandW = brand ? brand.offsetWidth : 0;
-        var btnW   = (menuBtn && menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
-        var needW  = brandW + inline.scrollWidth + btnW + SAFETY;
+      function recompute(){
+        if (!row) return;
+        const rowW   = row.clientWidth;
+        const brandW = brand ? brand.offsetWidth : 0;
+        const btnW   = (menuBtn && menuBtn.offsetParent !== null ? menuBtn.offsetWidth : MIN_MENU_BTN);
+        const inlineW= measureInlineWidth();
 
-        var collapse = needW > rowW;
-        inline.style.display = prev;
+        const needW  = brandW + inlineW + btnW + SAFETY;
+        const collapse = needW > rowW;
+
         row.classList.toggle('pp-collapsed', collapse);
         if (menuBtn) menuBtn.style.display = collapse ? 'inline-flex' : 'none';
       }
 
-      // Slide-out open/close
+      // 3) Slide-out open/close
       function openMenu(){
         if (!sheet || !menuBtn) return;
         sheet.setAttribute('aria-hidden','false');
         menuBtn.setAttribute('aria-expanded','true');
-        setTimeout(function(){ (firstLink || closeBtn).focus(); }, 0);
+        setTimeout(()=>{ (firstLink || closeBtn)?.focus(); }, 0);
         document.body.style.overflow = 'hidden';
       }
       function closeMenu(){
@@ -215,29 +214,24 @@
         document.body.style.overflow = '';
       }
 
-      if (menuBtn) menuBtn.addEventListener('click', openMenu);
-      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-      if (sheet && panel){
-        sheet.addEventListener('click', function(e){ if (!panel.contains(e.target)) closeMenu(); });
-      }
-      window.addEventListener('keydown', function(e){
-        if (sheet && sheet.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') {
-          e.preventDefault(); closeMenu();
-        }
+      menuBtn?.addEventListener('click', openMenu);
+      closeBtn?.addEventListener('click', closeMenu);
+      sheet?.addEventListener('click', (e)=>{ if (panel && !panel.contains(e.target)) closeMenu(); });
+      window.addEventListener('keydown', (e)=>{
+        if (sheet?.getAttribute('aria-hidden') === 'false' && e.key === 'Escape') { e.preventDefault(); closeMenu(); }
       });
 
-      // Recompute on load/resize/orientation and on content changes
-      window.addEventListener('load', measureAndToggle);
-      window.addEventListener('resize', measureAndToggle);
-      window.addEventListener('orientationchange', measureAndToggle);
+      // 4) Recompute responsively (no flashing)
+      window.addEventListener('load', recompute);
+      window.addEventListener('resize', recompute);
+      window.addEventListener('orientationchange', recompute);
       if (window.ResizeObserver){
-        var ro = new ResizeObserver(measureAndToggle);
+        const ro = new ResizeObserver(recompute);
         if (row) ro.observe(row);
-        if (inline) ro.observe(inline);
         if (brand) ro.observe(brand);
+        if (inline) ro.observe(inline);
       }
-      // Initial run
-      measureAndToggle();
+      recompute();
     })();
   </script>
 </div>
