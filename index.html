@@ -53,6 +53,10 @@
             --space-3: 16px;
             --space-4: 20px;
             --space-5: 28px;
+
+            /* Carousel Image Size */
+             --shot-max-w: 1242px;
+  --shot-max-h: 2688px;
         }
 
         body {
@@ -422,16 +426,20 @@
             font-weight: 800;
         }
 
-        .pp-carousel-viewport {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            /* Portrait mobile screenshots default; adjust as you like */
-            aspect-ratio: 9 / 19.5;
-            /* Supported widely; fallback below */
-            background: #eef4ff;
-        }
+        .pp-carousel-viewport{
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
 
+  /* Use the iOS portrait screenshot ratio and hard caps */
+  aspect-ratio: 1242 / 2688;
+  width: 100%;
+  max-width: var(--shot-max-w);
+  max-height: var(--shot-max-h);
+
+  margin-inline: auto;          /* keep it centered */
+  background: #eef4ff;
+}
         /* Fallback for browsers without aspect-ratio support */
         @supports not (aspect-ratio: 1 / 1) {
             .pp-carousel-viewport::before {
@@ -463,13 +471,19 @@
             user-select: none;
         }
 
-        .pp-carousel-slide img {
-            width: auto;
-            height: 100%;
-            object-fit: contain;
-            /* keeps phone screenshot crisp without cropping */
-            display: block;
-        }
+       .pp-carousel-slide img{
+  /* Never render larger than 1242×2688 */
+  max-width: var(--shot-max-w);
+  max-height: var(--shot-max-h);
+
+  /* Fill the viewport but keep the whole screenshot visible */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  display: block;
+}
+
 
         .pp-carousel-arrow {
             position: absolute;
@@ -614,6 +628,7 @@
 
     <!-- ===== Screenshot Carousel (under welcome container) ===== -->
     <section class="pp-carousel" aria-roledescription="carousel" aria-label="PawPrints app screenshots">
+
         <h2 class="pp-carousel-header">See the app in action</h2>
 
         <div class="pp-carousel-viewport" tabindex="0" aria-live="polite">
@@ -622,18 +637,22 @@
                 <li class="pp-carousel-slide" role="option" aria-label="Screenshot 1 of 5" aria-selected="true">
                     <img src="/assets/screens/screen1.jpg" alt="Home feed showing pet posts" loading="lazy" />
                 </li>
+
                 <!-- Slide 2 -->
                 <li class="pp-carousel-slide" role="option" aria-label="Screenshot 2 of 5" aria-selected="false">
                     <img src="/assets/screens/screen2.jpg" alt="Create a new post editor" loading="lazy" />
                 </li>
+
                 <!-- Slide 3 -->
                 <li class="pp-carousel-slide" role="option" aria-label="Screenshot 3 of 5" aria-selected="false">
                     <img src="/assets/screens/screen3.jpg" alt="Pet profile page" loading="lazy" />
                 </li>
+
                 <!-- Slide 4 -->
                 <li class="pp-carousel-slide" role="option" aria-label="Screenshot 4 of 5" aria-selected="false">
                     <img src="/assets/screens/screen4.jpg" alt="Messages view" loading="lazy" />
                 </li>
+
                 <!-- Slide 5 -->
                 <li class="pp-carousel-slide" role="option" aria-label="Screenshot 5 of 5" aria-selected="false">
                     <img src="/assets/screens/screen5.jpg" alt="Nearby playmates map" loading="lazy" />
@@ -657,17 +676,21 @@
         <div class="pp-carousel-dots" role="tablist" aria-label="Choose screenshot">
             <button class="pp-carousel-dot" role="tab" aria-selected="true" aria-controls="slide-1"
                 tabindex="0"></button>
+
             <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-2"
                 tabindex="-1"></button>
+
             <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-3"
                 tabindex="-1"></button>
+
             <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-4"
                 tabindex="-1"></button>
+
             <button class="pp-carousel-dot" role="tab" aria-selected="false" aria-controls="slide-5"
                 tabindex="-1"></button>
         </div>
+    
     </section>
-
 
     <!-- ===== Shared header JS (width-aware collapse + slide-out) ===== -->
     <script>
